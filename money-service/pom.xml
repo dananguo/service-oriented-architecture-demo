@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.soa</groupId>
-    <artifactId>user-service</artifactId>
+    <artifactId>money-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-service</name>
+    <name>money-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -124,5 +124,4 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
-
 </project>

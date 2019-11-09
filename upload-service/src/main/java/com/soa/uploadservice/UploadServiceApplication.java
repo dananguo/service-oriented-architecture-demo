@@ -1,4 +1,4 @@
-package com.soa.userservice;
+package com.soa.uploadservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,9 +12,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableHystrixDashboard
 @EnableCircuitBreaker
-public class UserServiceApplication {
+public class UploadServiceApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApplication.class, args);
+        SpringApplication.run(UploadServiceApplication.class, args);
     }
 
 }
