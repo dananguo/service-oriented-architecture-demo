@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>Spring cloud zuul</name>
+    <name>SOA parent project</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
