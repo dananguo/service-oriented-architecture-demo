@@ -1,6 +1,5 @@
 package com.soa.showaggregationservice.controller;
 
-import com.soa.showaggregationservice.ShowAggregation;
 import com.soa.showaggregationservice.pojo.Aggregation;
 import com.soa.showaggregationservice.pojo.Book;
 import com.soa.showaggregationservice.pojo.BookInfo;
@@ -37,13 +36,11 @@ public class ShowAggregationController {
        Book book=new Book();
        book=inventoryRemote.QueryInventory(id);
        aggregation.setBook(book);
-        String user_id=book.getBook_id();
-        PersonInfo person=new PersonInfo();
-        person=personRemote.QueryPerson(user_id);
-        aggregation.setPersonInfo(person);
-        return aggregation;
-
-
+       String user_id=book.getBook_id();
+       PersonInfo person=new PersonInfo();
+       person=personRemote.QueryPerson(user_id);
+       aggregation.setPersonInfo(person);
+       return aggregation;
     }
 
 

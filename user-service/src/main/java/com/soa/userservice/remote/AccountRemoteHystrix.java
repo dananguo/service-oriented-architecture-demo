@@ -1,7 +1,6 @@
 package com.soa.userservice.remote;
 
 import com.soa.userservice.pojo.*;
-import com.soa.userservice.pojo.param.*;
 
 public class AccountRemoteHystrix implements AccountRemote{
     @Override

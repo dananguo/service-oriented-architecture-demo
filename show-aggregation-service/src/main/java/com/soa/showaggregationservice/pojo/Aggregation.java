@@ -1,6 +1,7 @@
 package com.soa.showaggregationservice.pojo;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Data;
 
 /**
  * @program: show-aggregation-service
@@ -8,6 +9,7 @@ import com.alibaba.fastjson.JSON;
  * @author: Yu Liu
  * @create: 2019/11/12
  **/
+@Data
 public class Aggregation {
     private BookInfo bookInfo;
     private PersonInfo personInfo;
