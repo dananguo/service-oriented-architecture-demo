@@ -1,13 +1,9 @@
 spring:
   cloud:
     config:
-      name: soa-config
+      name: soa-config,data
       profile: dev
       label: master
-      discovery:
-        enabled: true
-        serviceId: spring-cloud-config-server
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9000/eureka/
+      uri: http://118.25.88.125:8002
+  profiles:
+    active: dev
