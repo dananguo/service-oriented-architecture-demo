@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableZuulProxy
 @EnableFeignClients
+@EnableDiscoveryClient
 public class ZuulApplication {
 
     public static void main(String[] args) {

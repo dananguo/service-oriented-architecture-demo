@@ -22,7 +22,6 @@ public class BookInfo {
     private String author;
     private String describe;
     private String book_price;
-
     @Override
     public String toString() {
         return JSON.toJSONString(this);
