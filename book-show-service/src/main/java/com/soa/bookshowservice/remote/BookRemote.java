@@ -1,11 +1,9 @@
-package com.soa.showaggregationservice.remote;
+package com.soa.bookshowservice.remote;
 
-
-import com.soa.showaggregationservice.pojo.BookInfo;
+import com.soa.bookshowservice.pojo.BookInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Primary
 @FeignClient(name= "spring-cloud-Book")
