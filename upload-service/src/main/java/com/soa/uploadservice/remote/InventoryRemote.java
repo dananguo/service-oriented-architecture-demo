@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 @Primary
-@FeignClient(name= "spring-cloud-Inventory")
+@FeignClient(name= "inventory-service")
 public interface InventoryRemote {
     //新建库存
     @PostMapping("/Inventory")

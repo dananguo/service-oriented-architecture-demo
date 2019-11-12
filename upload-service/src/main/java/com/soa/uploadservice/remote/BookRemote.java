@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.print.Book;
 
 @Primary
-@FeignClient(name= "spring-cloud-Book")
+@FeignClient(name= "book-service")
 public interface BookRemote {
     //新建书籍信息
     @PostMapping("/Book")
