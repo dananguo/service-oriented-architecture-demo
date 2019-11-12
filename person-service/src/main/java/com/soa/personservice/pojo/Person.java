@@ -6,11 +6,13 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.lang.annotation.Documented;
 import java.sql.Timestamp;
 
 /**
@@ -18,9 +20,8 @@ import java.sql.Timestamp;
  * @date 2019/11/5 23:31
  */
 @Data
-@Entity(name = "Person")
-//@DynamicUpdate
-//@DynamicInsert
+@Entity(name = "User")
+
 public class Person {
 
     @Id
