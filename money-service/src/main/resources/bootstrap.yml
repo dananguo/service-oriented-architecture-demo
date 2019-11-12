@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      name: soa-config,data
+      profile: dev
+      label: master
+      uri: http://118.25.88.125:8002
+  profiles:
+    active: dev

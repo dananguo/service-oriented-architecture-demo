@@ -102,19 +102,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--junit-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>
