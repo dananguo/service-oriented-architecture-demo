@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.soa</groupId>
-    <artifactId>upload-service</artifactId>
+    <artifactId>user-show-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>upload-service</name>
+    <name>user-show-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
