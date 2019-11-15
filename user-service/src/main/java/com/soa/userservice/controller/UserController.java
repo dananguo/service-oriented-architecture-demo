@@ -50,4 +50,31 @@ public class UserController {
         Sign_up_Result result=accountRemote.CreateNew(sign_up);
         return result;
     }
+
+    @PostMapping("/PersonInfo")
+    @ResponseBody
+    public Stand_Result NewPerson(@RequestBody PersonInfo personInfo)
+    {
+
+        Stand_Result result=personRemote.NewPerson(personInfo);
+
+
+        return result;
+    }
+
+    @GetMapping("/PersonInfo")
+    @ResponseBody
+    public PersonInfo GetPerson(@RequestParam String id)
+    {
+        PersonInfo personInfo=personRemote.QueryPerson(id);
+        return personInfo;
+    }
+
+    @DeleteMapping("/PersonInfo")
+    @ResponseBody
+    public Stand_Result DeletePerson(@RequestParam String id)
+    {
+        Stand_Result result=personRemote.Delete(id);
+        return result;
+    }
 }
