@@ -3,8 +3,8 @@ import lombok.Data;
 
 @Data
 public class AccountInfo {
-    private String id;
-    private String Account;
-    private String Pwd;
-    private String Role;
+    public String id;
+    public String Account;
+    public String Pwd;
+    public String Role;
 }

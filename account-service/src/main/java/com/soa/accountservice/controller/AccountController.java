@@ -22,7 +22,7 @@ public class AccountController {
         account.setRole(sign_up_params.getRole());
         accountService.save(account);
         Sign_up_Result result=new Sign_up_Result();
-        result.setId(account.getAccount());
+        result.setId(account.get_id());
         result.setSucceed(true);
         result.setWrongCode(0);
         return result;

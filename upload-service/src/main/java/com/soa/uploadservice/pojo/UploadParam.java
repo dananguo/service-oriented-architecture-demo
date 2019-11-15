@@ -2,15 +2,15 @@ package com.soa.uploadservice.pojo;
 import lombok.Data;
 @Data
 public class UploadParam {
-    private String book_id;
-    private String book_title;
-    private String book_type;
-    private String picture_url;
-    private String publisher;
-    private String author;
-    private String describe;
-    private String string_price;
-    private String user_id;
-    private double book_price;
-    private int inventory_quantity;
+    public String book_id;
+    public String book_title;
+    public String book_type;
+    public String picture_url;
+    public String publisher;
+    public String author;
+    public String describe;
+    public String string_price;
+    public String user_id;
+    public double book_price;
+    public int inventory_quantity;
 }
