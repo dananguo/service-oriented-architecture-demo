@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 @Primary
-@FeignClient(name= "spring-cloud-Account",fallback = AccountRemoteHystrix.class)
+@FeignClient(name= "account-service",fallback = AccountRemoteHystrix.class)
 public interface AccountRemote {
     //新建账户
     @PostMapping("/Account")

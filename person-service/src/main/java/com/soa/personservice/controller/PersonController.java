@@ -7,6 +7,10 @@ import com.soa.personservice.pojo.Stand_Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RestController
 public class PersonController {
     @Autowired
@@ -16,6 +20,7 @@ public class PersonController {
 
     @PostMapping("/Person")
     public Stand_Result NewPerson(@RequestBody PersonInfo personInfo) {
+        System.out.println(personInfo);
         Person person=new Person();
         person.setId(personInfo.getId());
         person.setName(personInfo.getName());
@@ -24,9 +29,13 @@ public class PersonController {
         person.setCountry(personInfo.getCountry());
         person.setSignature(personInfo.getSignature());
         person.setEmail(personInfo.getE_mail());
-        /*还没添加时间参数，先空着*/
-
+        person.setPhone(personInfo.getPhone());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        person.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        System.out.println(person);
         personService.save(person);
+
+        //返回标准的信息
         Stand_Result result=new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");

@@ -3,12 +3,12 @@ import lombok.Data;
 
 @Data
 public class PersonInfo {
-    private String id;
-    private String Name;
-    private int Age;
-    private String Sex;
-    private String Country;
-    private String Signature;
-    private String Phone;
-    private String E_mail;
+    public String id;
+    public String Name;
+    public int Age;
+    public String Sex;
+    public String Country;
+    public String Signature;
+    public String Phone;
+    public String E_mail;
 }

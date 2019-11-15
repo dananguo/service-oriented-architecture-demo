@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 @Primary
-@FeignClient(name= "spring-cloud-Person",fallback = PersonRemoteHystrix.class)
+@FeignClient(name= "person-service",fallback = PersonRemoteHystrix.class)
 public interface PersonRemote {
     //新建个人信息
 

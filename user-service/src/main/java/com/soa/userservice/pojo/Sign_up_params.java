@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Sign_up_params {
-    private String Account;
-    private  String Pwd;
-    private  String Role;
+    public String Account;
+    public  String Pwd;
+    public  String Role;
 }
