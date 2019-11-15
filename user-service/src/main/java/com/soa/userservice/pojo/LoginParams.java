@@ -3,6 +3,7 @@ import lombok.Data;
 
 @Data
 public class LoginParams {
+    public String id;
     public String Account;
     public String Pwd;
 }
