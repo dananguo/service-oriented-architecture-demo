@@ -8,6 +8,7 @@ import com.soa.uploadservice.remote.BookRemote;
 import com.soa.uploadservice.remote.InventoryRemote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,8 +41,29 @@ public class UploadController {
         bookInfo.setBook_price(uploadParam.getString_price());
 
         //调用remote，然后得出结果
-        bookRemote.NewBook(bookInfo);
-        inventoryRemote.NewInventory(book);
+         bookRemote.NewBook(bookInfo);
+        String test= inventoryRemote.NewInventory(book);
+        System.out.println(test);
+        Stand_Result result=new Stand_Result();
+        result.setWrongCode("0");
+        result.setSucceed(true);
+        return result;
+    }
+
+    @PutMapping("/Inventory")
+    public Stand_Result UpdateInventory(@RequestBody Book book)
+    {
+        inventoryRemote.Update(book);
+        Stand_Result result=new Stand_Result();
+        result.setWrongCode("0");
+        result.setSucceed(true);
+        return result;
+    }
+
+    @PutMapping("/BookInfo")
+    public Stand_Result UpdateBook(@RequestBody BookInfo bookInfo)
+    {
+        bookRemote.Update(bookInfo);
         Stand_Result result=new Stand_Result();
         result.setWrongCode("0");
         result.setSucceed(true);

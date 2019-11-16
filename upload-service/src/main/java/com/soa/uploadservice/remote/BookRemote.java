@@ -13,10 +13,10 @@ import java.awt.print.Book;
 public interface BookRemote {
     //新建书籍信息
     @PostMapping("/Book")
-    public Stand_Result NewBook(@RequestBody BookInfo bookInfo);
+    public String  NewBook(@RequestBody BookInfo bookInfo);
     //修改书籍信息
     @PutMapping("/Book")
-    public Stand_Result ModifyBook(@RequestBody BookInfo bookInfo);
+    public Stand_Result Update(@RequestBody BookInfo bookInfo);
     //删除书籍信息
     @DeleteMapping("/Book")
     public Stand_Result DeleteBook(@RequestParam(value = "id") String id);

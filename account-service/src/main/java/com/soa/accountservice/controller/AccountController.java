@@ -43,8 +43,19 @@ public class AccountController {
 
     //修改账户
     @PutMapping("/Account")
-    public Stand_Result Update(@RequestBody LoginParams loginParams) {
-        return null;
+    public Stand_Result Update(@RequestBody AccountInfo accountInfo) {
+        System.out.println(accountInfo);
+        Account account=new Account();
+        account.set_id(accountInfo.getId());
+        account.setAccount(accountInfo.getAccount());
+        account.setPwd(accountInfo.getPwd());
+        account.setRole(accountInfo.getRole());
+        accountService.save(account);
+
+        Stand_Result result=new Stand_Result();
+        result.setSucceed(true);
+        result.setWrongCode("0");
+        return result;
     }
 
     //删除账户

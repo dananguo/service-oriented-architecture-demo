@@ -42,6 +42,14 @@ public class UserController {
         return result;
     }
 
+    @PutMapping("/UpdateAccount")
+    @ResponseBody
+    public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)
+    {
+
+        Stand_Result result=accountRemote.Update(accountInfo);
+        return result;
+    }
     @PostMapping("/CreateAccount")
     @ResponseBody
     public Sign_up_Result CreateAccount(@RequestBody Sign_up_params sign_up)
@@ -59,6 +67,15 @@ public class UserController {
         Stand_Result result=personRemote.NewPerson(personInfo);
 
 
+        return result;
+    }
+
+
+    @PutMapping("/PersonInfo")
+    @ResponseBody
+    public Stand_Result UpdatePerson(@RequestBody PersonInfo personInfo)
+    {
+        Stand_Result result= personRemote.Update(personInfo);
         return result;
     }
 

@@ -3,6 +3,7 @@ package com.soa.userservice.remote;
 import com.soa.userservice.pojo.*;
 
 public class AccountRemoteHystrix implements AccountRemote{
+
     @Override
     public Sign_up_Result CreateNew(Sign_up_params sign_up_params) {
         return null;
@@ -14,7 +15,7 @@ public class AccountRemoteHystrix implements AccountRemote{
     }
 
     @Override
-    public Stand_Result Update(LoginParams loginParams) {
+    public Stand_Result Update(AccountInfo accountInfo) {
         return null;
     }
 
