@@ -3,9 +3,11 @@ package com.soa.inventoryservice.controller;
 import com.soa.inventoryservice.pojo.Book;
 import com.soa.inventoryservice.pojo.Stand_Result;
 import com.soa.inventoryservice.service.InventoryService;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@EnableSwagger2Doc
 @RestController
 public class InventoryController {
 
@@ -44,4 +46,10 @@ public class InventoryController {
         /*未加入操作时间*/
         return result;
     }
+    @GetMapping("/Inventory")
+    public Book QueryInventory(@RequestParam(value="id") String id){
+        return inventoryService.findById(id);
+    }
+
+
 }

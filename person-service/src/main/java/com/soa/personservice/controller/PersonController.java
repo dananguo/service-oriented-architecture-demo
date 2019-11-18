@@ -4,13 +4,14 @@ import com.soa.personservice.Service.PersonService;
 import com.soa.personservice.pojo.Person;
 import com.soa.personservice.pojo.PersonInfo;
 import com.soa.personservice.pojo.Stand_Result;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@EnableSwagger2Doc
 @RestController
 public class PersonController {
     @Autowired

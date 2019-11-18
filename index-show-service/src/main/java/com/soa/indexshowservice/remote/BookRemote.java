@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Primary
-@FeignClient(name= "spring-cloud-Book")
+@FeignClient(name= "book-service")
 public interface BookRemote {
 
-    @GetMapping("Books")
+    @GetMapping("/Books")
     public List QuerySomeBook(@RequestParam(value="count") int count);
 }
