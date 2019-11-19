@@ -7,10 +7,7 @@ import com.soa.uploadservice.pojo.UploadParam;
 import com.soa.uploadservice.remote.BookRemote;
 import com.soa.uploadservice.remote.InventoryRemote;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UploadController {
@@ -25,14 +22,14 @@ public class UploadController {
         //将参数拆分成两个部分
         Book book=new Book();
         BookInfo bookInfo=new BookInfo();
-
-        book.setBook_id(uploadParam.getBook_id());
         book.setUser_id(uploadParam.getUser_id());
         book.setBook_price(uploadParam.getBook_price());
         book.setInventory_quantity(uploadParam.getInventory_quantity());
+        String  id=inventoryRemote.NewInventory(book);
 
-        bookInfo.setId(uploadParam.getBook_id());
-        bookInfo.setBook_id(uploadParam.getBook_id());
+
+        bookInfo.setId(id);
+        bookInfo.setBook_id(book.getBook_id());
         bookInfo.setBook_title(uploadParam.getBook_title());
         bookInfo.setBook_type(uploadParam.getBook_type());
         bookInfo.setPicture_url(uploadParam.getPicture_url());
@@ -43,8 +40,8 @@ public class UploadController {
 
         //调用remote，然后得出结果
          bookRemote.NewBook(bookInfo);
-        String test= inventoryRemote.NewInventory(book);
-        System.out.println(test);
+
+
         Stand_Result result=new Stand_Result();
         result.setWrongCode("0");
         result.setSucceed(true);
@@ -65,6 +62,18 @@ public class UploadController {
     public Stand_Result UpdateBook(@RequestBody BookInfo bookInfo)
     {
         bookRemote.Update(bookInfo);
+        Stand_Result result=new Stand_Result();
+        result.setWrongCode("0");
+        result.setSucceed(true);
+        return result;
+    }
+
+    @DeleteMapping("/Upload")
+    public Stand_Result DeleteBook(@RequestParam(value = "id") String id)
+    {
+        bookRemote.DeleteBook(id);
+        inventoryRemote.DeleteInventory(id);
+
         Stand_Result result=new Stand_Result();
         result.setWrongCode("0");
         result.setSucceed(true);
