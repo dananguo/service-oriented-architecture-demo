@@ -6,9 +6,10 @@ import com.soa.uploadservice.pojo.Stand_Result;
 import com.soa.uploadservice.pojo.UploadParam;
 import com.soa.uploadservice.remote.BookRemote;
 import com.soa.uploadservice.remote.InventoryRemote;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+@EnableSwagger2Doc
 @RestController
 public class UploadController {
     @Autowired

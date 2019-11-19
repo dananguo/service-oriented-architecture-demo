@@ -38,7 +38,8 @@ public class ZuulApplication {
             resources.add(swaggerResource("person-service","/person-service/v2/api-docs","2.0"));
             resources.add(swaggerResource("show-aggregation-service","/show-aggregation-service/v2/api-docs","2.0"));
             resources.add(swaggerResource("user-show-service","/user-show-service/v2/api-docs","2.0"));
-
+            resources.add(swaggerResource("account-service","/account-service/v2/api-docs","2.0"));
+            resources.add(swaggerResource("upload-service","/upload-service/v2/api-docs","2.0"));
             return resources;
         }
 

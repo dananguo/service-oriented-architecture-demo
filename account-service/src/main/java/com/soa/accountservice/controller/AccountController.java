@@ -2,11 +2,12 @@ package com.soa.accountservice.controller;
 
 import com.soa.accountservice.Service.AccountService;
 import com.soa.accountservice.pojo.*;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.apache.ibatis.annotations.Delete;
 import org.hibernate.cache.spi.AbstractCacheTransactionSynchronization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+@EnableSwagger2Doc
 @RestController
 public class AccountController {
 

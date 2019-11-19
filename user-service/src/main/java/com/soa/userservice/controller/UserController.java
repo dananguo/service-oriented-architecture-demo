@@ -3,12 +3,13 @@ package com.soa.userservice.controller;
 import com.soa.userservice.pojo.*;
 import com.soa.userservice.remote.AccountRemote;
 import com.soa.userservice.remote.PersonRemote;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@EnableSwagger2Doc
 @RestController
 public class UserController {
 
