@@ -7,6 +7,7 @@ import com.soa.showaggregationservice.pojo.PersonInfo;
 import com.soa.showaggregationservice.remote.BookRemote;
 import com.soa.showaggregationservice.remote.InventoryRemote;
 import com.soa.showaggregationservice.remote.PersonRemote;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author: Yu Liu
  * @create: 2019/11/11
  **/
+@EnableSwagger2Doc
 @RestController
 public class ShowAggregationController {
     @Autowired
@@ -27,8 +29,8 @@ public class ShowAggregationController {
     @Autowired
     InventoryRemote inventoryRemote;
 
-    @GetMapping("/ShowAggregation/id={id}")
-    public Aggregation aggregationShow(@PathVariable("id") String id){
+    @GetMapping("/ShowAggregation")
+    public String aggregationShow(@RequestParam("id") String id){
        Aggregation aggregation=new Aggregation();
        BookInfo bookInfo=new BookInfo();
        bookInfo=bookRemote.QueryBook(id);
@@ -40,7 +42,7 @@ public class ShowAggregationController {
        PersonInfo person=new PersonInfo();
        person=personRemote.QueryPerson(user_id);
        aggregation.setPersonInfo(person);
-       return aggregation;
+       return aggregation.toString();
     }
 
 

@@ -6,9 +6,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 @Primary
-@FeignClient(name= "spring-cloud-Book")
+@FeignClient(name= "book-service",fallback = BookRemoteHystrix.class)
 public interface BookRemote {
     //获取书籍信息
     @GetMapping("/Book")
     public BookInfo QueryBook(@RequestParam(value = "id") String id);
+
 }
