@@ -1,5 +1,6 @@
 package com.soa.showaggregationservice.pojo;
 
+import com.alibaba.fastjson.JSON;
 import lombok.Data;
 
 
@@ -13,4 +14,9 @@ public class PersonInfo {
     private String Signature;
     private String Phone;
     private String E_mail;
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+    }
 }

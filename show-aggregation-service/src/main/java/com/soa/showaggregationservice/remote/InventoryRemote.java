@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
 @Primary
-@FeignClient(name= "spring-cloud-Inventory")
+@FeignClient(name= "inventory-service",fallback = InventoryRemoteHystrix.class)
 public interface InventoryRemote {
     @GetMapping("/Inventory")
     public Book QueryInventory(@RequestParam(value="id") String id);
