@@ -16,13 +16,13 @@ public class BookController {
     public String  NewBook(@RequestBody BookInfo bookInfo) {
         bookService.save(bookInfo);
         Stand_Result result=new Stand_Result();
-        return bookInfo.getBook_id();
+        return bookInfo.getId();
     }
 
     //修改书籍信息
     @PutMapping("/Book")
     public Stand_Result Update(@RequestBody BookInfo bookInfo) {
-        bookService.deleteById(bookInfo.getBook_id());
+        bookService.deleteById(bookInfo.getId());
         bookService.save(bookInfo);
 
         Stand_Result result=new Stand_Result();

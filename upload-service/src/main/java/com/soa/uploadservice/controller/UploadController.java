@@ -31,6 +31,7 @@ public class UploadController {
         book.setBook_price(uploadParam.getBook_price());
         book.setInventory_quantity(uploadParam.getInventory_quantity());
 
+        bookInfo.setId(uploadParam.getBook_id());
         bookInfo.setBook_id(uploadParam.getBook_id());
         bookInfo.setBook_title(uploadParam.getBook_title());
         bookInfo.setBook_type(uploadParam.getBook_type());
