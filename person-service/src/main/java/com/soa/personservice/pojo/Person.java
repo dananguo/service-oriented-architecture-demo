@@ -24,9 +24,10 @@ import java.sql.Timestamp;
 
 public class Person {
 
+
+    //@GeneratedValue(generator = "system-uuid")
+    //@GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     @Column(name = "_id")
     private String id;
 

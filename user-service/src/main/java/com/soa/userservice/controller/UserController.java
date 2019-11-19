@@ -3,12 +3,13 @@ package com.soa.userservice.controller;
 import com.soa.userservice.pojo.*;
 import com.soa.userservice.remote.AccountRemote;
 import com.soa.userservice.remote.PersonRemote;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@EnableSwagger2Doc
 @RestController
 public class UserController {
 
@@ -42,6 +43,14 @@ public class UserController {
         return result;
     }
 
+    @PutMapping("/UpdateAccount")
+    @ResponseBody
+    public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)
+    {
+
+        Stand_Result result=accountRemote.Update(accountInfo);
+        return result;
+    }
     @PostMapping("/CreateAccount")
     @ResponseBody
     public Sign_up_Result CreateAccount(@RequestBody Sign_up_params sign_up)
@@ -59,6 +68,15 @@ public class UserController {
         Stand_Result result=personRemote.NewPerson(personInfo);
 
 
+        return result;
+    }
+
+
+    @PutMapping("/PersonInfo")
+    @ResponseBody
+    public Stand_Result UpdatePerson(@RequestBody PersonInfo personInfo)
+    {
+        Stand_Result result= personRemote.Update(personInfo);
         return result;
     }
 

@@ -18,7 +18,7 @@ public interface AccountRemote {
     public AccountInfo QueryAccount(@RequestParam(value = "id") String id);
     //修改账户
     @PutMapping("/Account")
-    public Stand_Result Update(@RequestBody LoginParams loginParams);
+    public Stand_Result Update(@RequestBody AccountInfo accountInfo);
     //删除账户
     @DeleteMapping("/Account")
     public Stand_Result Delete(@RequestParam(value = "id") String id);

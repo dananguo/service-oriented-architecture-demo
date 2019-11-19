@@ -16,19 +16,17 @@ public class InventoryController {
 
     //新建库存
     @PostMapping("/Inventory")
-    public Stand_Result NewInventory(@RequestBody Book book) {
+    public String NewInventory(@RequestBody Book book) {
         inventoryService.save(book);
-        Stand_Result result=new Stand_Result();
-        result.setSucceed(true);
-        result.setWrongCode("0");
-        /*未加入操作时间*/
-        return result;
+
+        return book.getBook_id();
     }
 
     //修改库存
     @PutMapping("/Inventory")
-    public Stand_Result ModifyInventory(@RequestParam(value = "id") String id) {
-        /*没有做，先放着*/
+    public Stand_Result Update(@RequestBody Book book) {
+        inventoryService.save(book);
+
         Stand_Result result=new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");

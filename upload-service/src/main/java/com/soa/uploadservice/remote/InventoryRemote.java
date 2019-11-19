@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public interface InventoryRemote {
     //新建库存
     @PostMapping("/Inventory")
-    public Stand_Result NewInventory(@RequestBody Book book);
+    public String  NewInventory(@RequestBody Book book);
 
     //修改库存
     @PutMapping("/Inventory")
-    public Stand_Result ModifyInventory(@RequestParam(value = "id") String id);
+    public Stand_Result Update(@RequestBody Book book);
 
     //删除库存
     @DeleteMapping("/Inventory")

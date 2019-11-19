@@ -18,19 +18,18 @@ public class BookController {
 
     //新建书籍信息
     @PostMapping("/Book")
-    public Stand_Result NewBook(@RequestBody BookInfo bookInfo) {
+    public String  NewBook(@RequestBody BookInfo bookInfo) {
         bookService.save(bookInfo);
         Stand_Result result=new Stand_Result();
-        result.setSucceed(true);
-        result.setWrongCode("0");
-        /*未加入操作时间*/
-        return result;
+        return bookInfo.getId();
     }
 
-    //修改书籍信息(暂时只做了标题修改)
+    //修改书籍信息
     @PutMapping("/Book")
-    public Stand_Result ModifyBook(@RequestBody BookInfo bookInfo) {
-        bookService.updateTitleById(bookInfo.getBook_id(),bookInfo.getBook_title());
+    public Stand_Result Update(@RequestBody BookInfo bookInfo) {
+        bookService.deleteById(bookInfo.getId());
+        bookService.save(bookInfo);
+
         Stand_Result result=new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");

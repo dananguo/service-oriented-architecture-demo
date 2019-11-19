@@ -33,7 +33,6 @@ public class PersonController {
         person.setPhone(personInfo.getPhone());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         person.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        System.out.println(person);
         personService.save(person);
 
         //返回标准的信息
@@ -64,7 +63,19 @@ public class PersonController {
 
     @PutMapping("/Person")
     public Stand_Result Update(@RequestBody PersonInfo personInfo) {
-        personService.modifyAgeById(personInfo.getAge(),personInfo.getId());
+        Person person=new Person();
+        person.setId(personInfo.getId());
+        person.setName(personInfo.getName());
+        person.setAge(personInfo.getAge());
+        person.setSex(personInfo.getSex());
+        person.setCountry(personInfo.getCountry());
+        person.setSignature(personInfo.getSignature());
+        person.setEmail(personInfo.getE_mail());
+        person.setPhone(personInfo.getPhone());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        person.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        personService.save(person);
+
         Stand_Result result=new Stand_Result();
         result.setWrongCode("0");
         result.setSucceed(true);

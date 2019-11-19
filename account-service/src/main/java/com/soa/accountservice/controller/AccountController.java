@@ -2,11 +2,12 @@ package com.soa.accountservice.controller;
 
 import com.soa.accountservice.Service.AccountService;
 import com.soa.accountservice.pojo.*;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.apache.ibatis.annotations.Delete;
 import org.hibernate.cache.spi.AbstractCacheTransactionSynchronization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+@EnableSwagger2Doc
 @RestController
 public class AccountController {
 
@@ -43,8 +44,19 @@ public class AccountController {
 
     //修改账户
     @PutMapping("/Account")
-    public Stand_Result Update(@RequestBody LoginParams loginParams) {
-        return null;
+    public Stand_Result Update(@RequestBody AccountInfo accountInfo) {
+        System.out.println(accountInfo);
+        Account account=new Account();
+        account.set_id(accountInfo.getId());
+        account.setAccount(accountInfo.getAccount());
+        account.setPwd(accountInfo.getPwd());
+        account.setRole(accountInfo.getRole());
+        accountService.save(account);
+
+        Stand_Result result=new Stand_Result();
+        result.setSucceed(true);
+        result.setWrongCode("0");
+        return result;
     }
 
     //删除账户

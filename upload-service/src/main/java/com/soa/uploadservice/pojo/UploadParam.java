@@ -2,7 +2,6 @@ package com.soa.uploadservice.pojo;
 import lombok.Data;
 @Data
 public class UploadParam {
-    public String book_id;
     public String book_title;
     public String book_type;
     public String picture_url;
