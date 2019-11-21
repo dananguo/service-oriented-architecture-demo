@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @Primary
 @FeignClient(name= "inventory-service",fallback = InventoryRemoteHystrix.class)
 public interface InventoryRemote {
-    @GetMapping("/Inventory")
-    public Book QueryInventory(@RequestParam(value="id") String id);
+    @GetMapping("/v1/Inventory/{id}")
+    public Book QueryInventory(@PathVariable("id") String id);
 }

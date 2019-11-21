@@ -40,6 +40,7 @@ public class ZuulApplication {
             resources.add(swaggerResource("user-show-service","/user-show-service/v2/api-docs","2.0"));
             resources.add(swaggerResource("account-service","/account-service/v2/api-docs","2.0"));
             resources.add(swaggerResource("upload-service","/upload-service/v2/api-docs","2.0"));
+            resources.add(swaggerResource("user-service","/user-service/v2/api-docs","2.0"));
             return resources;
         }
 

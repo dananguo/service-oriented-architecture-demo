@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.print.Book;
 
 @Primary
-@FeignClient(name= "book-service")
+@FeignClient(name= "book-service",fallback = BookRemoteHystrix.class)
 public interface BookRemote {
     //新建书籍信息
-    @PostMapping("/Book")
+    @PostMapping("/v1/Book")
     public String  NewBook(@RequestBody BookInfo bookInfo);
     //修改书籍信息
-    @PutMapping("/Book")
+    @PutMapping("/v1/Book")
     public Stand_Result Update(@RequestBody BookInfo bookInfo);
     //删除书籍信息
-    @DeleteMapping("/Book")
-    public Stand_Result DeleteBook(@RequestParam(value = "id") String id);
+    @DeleteMapping("/v1/Book/{id}")
+    public Stand_Result DeleteBook(@PathVariable("id") String id);
 }

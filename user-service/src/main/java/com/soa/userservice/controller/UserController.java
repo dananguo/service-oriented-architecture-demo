@@ -18,11 +18,11 @@ public class UserController {
     @Autowired
     PersonRemote personRemote;
 
-    @PostMapping("/login")
+    @PostMapping("/v1/User/login")
     @ResponseBody
     public LoginResult login(@RequestBody LoginParams params){
         //调基础服务拿到结果
-        //根据基础服务返回值，写返回给前端的结果,还没写
+
         LoginResult result=new LoginResult();
        AccountInfo accountInfo=accountRemote.QueryAccount(params.getId());
        if(params.getPwd().equals(accountInfo.getPwd()))
@@ -43,7 +43,7 @@ public class UserController {
         return result;
     }
 
-    @PutMapping("/UpdateAccount")
+    @PutMapping("/v1/User/Account")
     @ResponseBody
     public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)
     {
@@ -51,7 +51,7 @@ public class UserController {
         Stand_Result result=accountRemote.Update(accountInfo);
         return result;
     }
-    @PostMapping("/CreateAccount")
+    @PostMapping("/v1/User/Account")
     @ResponseBody
     public Sign_up_Result CreateAccount(@RequestBody Sign_up_params sign_up)
     {
@@ -60,7 +60,7 @@ public class UserController {
         return result;
     }
 
-    @PostMapping("/PersonInfo")
+    @PostMapping("/v1/User/PersonInfo")
     @ResponseBody
     public Stand_Result NewPerson(@RequestBody PersonInfo personInfo)
     {
@@ -72,7 +72,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/PersonInfo")
+    @PutMapping("/v1/User/PersonInfo")
     @ResponseBody
     public Stand_Result UpdatePerson(@RequestBody PersonInfo personInfo)
     {
@@ -80,17 +80,17 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/PersonInfo")
+    @GetMapping("/v1/User/PersonInfo/{id}")
     @ResponseBody
-    public PersonInfo GetPerson(@RequestParam String id)
+    public PersonInfo GetPerson(@PathVariable("id") String id)
     {
         PersonInfo personInfo=personRemote.QueryPerson(id);
         return personInfo;
     }
 
-    @DeleteMapping("/PersonInfo")
+    @DeleteMapping("/v1/User/PersonInfo/{id}")
     @ResponseBody
-    public Stand_Result DeletePerson(@RequestParam String id)
+    public Stand_Result DeletePerson(@PathVariable("id") String id)
     {
         Stand_Result result=personRemote.Delete(id);
         return result;

@@ -19,7 +19,7 @@ public class PersonController {
 
     //新建个人信息
 
-    @PostMapping("/Person")
+    @PostMapping("/v1/Person")
     public Stand_Result NewPerson(@RequestBody PersonInfo personInfo) {
         System.out.println(personInfo);
         Person person=new Person();
@@ -44,8 +44,8 @@ public class PersonController {
 
     //查询个人信息
 
-    @GetMapping("/Person")
-    public PersonInfo QueryPerson(@RequestParam(value = "id") String id) {
+    @GetMapping("/v1/Person/{id}")
+    public PersonInfo QueryPerson(@PathVariable("id") String id) {
         Person person=personService.findById(id);
         PersonInfo personInfo=new PersonInfo();
         personInfo.setAge(person.getAge());
@@ -61,7 +61,7 @@ public class PersonController {
 
     //修改个人信息
 
-    @PutMapping("/Person")
+    @PutMapping("/v1/Person")
     public Stand_Result Update(@RequestBody PersonInfo personInfo) {
         Person person=new Person();
         person.setId(personInfo.getId());
@@ -85,8 +85,8 @@ public class PersonController {
 
     //删除个人信息
 
-    @DeleteMapping("/Person")
-    public Stand_Result Delete(@RequestParam(value = "id") String id) {
+    @DeleteMapping("/v1/Person/{id}")
+    public Stand_Result Delete(@PathVariable("id") String id) {
         personService.delete(id);
         Stand_Result result=new Stand_Result();
         result.setWrongCode("0");

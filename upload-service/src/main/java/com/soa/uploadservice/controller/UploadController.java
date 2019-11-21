@@ -17,7 +17,7 @@ public class UploadController {
     @Autowired
     InventoryRemote inventoryRemote;
 
-    @PostMapping("/Upload")
+    @PostMapping("/v1/Upload")
     public Stand_Result uploadbook(@RequestBody UploadParam uploadParam)
     {
         //将参数拆分成两个部分
@@ -49,7 +49,7 @@ public class UploadController {
         return result;
     }
 
-    @PutMapping("/Inventory")
+    @PutMapping("/v1/Upload/Inventory")
     public Stand_Result UpdateInventory(@RequestBody Book book)
     {
         inventoryRemote.Update(book);
@@ -59,7 +59,7 @@ public class UploadController {
         return result;
     }
 
-    @PutMapping("/BookInfo")
+    @PutMapping("/v1/Upload/BookInfo")
     public Stand_Result UpdateBook(@RequestBody BookInfo bookInfo)
     {
         bookRemote.Update(bookInfo);
@@ -69,8 +69,8 @@ public class UploadController {
         return result;
     }
 
-    @DeleteMapping("/Upload")
-    public Stand_Result DeleteBook(@RequestParam(value = "id") String id)
+    @DeleteMapping("/v1/Upload/{id}")
+    public Stand_Result DeleteBook(@PathVariable("id") String id)
     {
         bookRemote.DeleteBook(id);
         inventoryRemote.DeleteInventory(id);

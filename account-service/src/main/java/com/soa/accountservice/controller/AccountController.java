@@ -15,7 +15,7 @@ public class AccountController {
     private AccountService accountService;
 
     //新建账户
-    @PostMapping("/Account")
+    @PostMapping("/v1/Account")
     public Sign_up_Result CreateNew(@RequestBody Sign_up_params sign_up_params) {
         Account account=new Account();
         account.setAccount(sign_up_params.getAccount());
@@ -30,8 +30,8 @@ public class AccountController {
     }
 
     //查询账户
-    @GetMapping("/Account")
-    public AccountInfo QueryAccount(@RequestParam(value = "id") String id) {
+    @GetMapping("/v1/Account/{id}")
+    public AccountInfo QueryAccount(@PathVariable("id") String id) {
         Account account=new Account();
         account=accountService.findById(id);
         AccountInfo accountInfo=new AccountInfo();
@@ -43,7 +43,7 @@ public class AccountController {
     }
 
     //修改账户
-    @PutMapping("/Account")
+    @PutMapping("/v1/Account")
     public Stand_Result Update(@RequestBody AccountInfo accountInfo) {
         System.out.println(accountInfo);
         Account account=new Account();
@@ -60,9 +60,9 @@ public class AccountController {
     }
 
     //删除账户
-    @DeleteMapping("/Account/{id}")
-    public Stand_Result Delete(@PathVariable("_id") String _id) {
-        accountService.delete(_id);
+    @DeleteMapping("/v1/Account/{id}")
+    public Stand_Result Delete(@PathVariable("id") String id) {
+        accountService.delete(id);
         Stand_Result result=new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");

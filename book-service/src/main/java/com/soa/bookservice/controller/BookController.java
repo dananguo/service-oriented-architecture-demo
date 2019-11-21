@@ -17,7 +17,7 @@ public class BookController {
     private BookService bookService;
 
     //新建书籍信息
-    @PostMapping("/Book")
+    @PostMapping("/v1/Book")
     public String  NewBook(@RequestBody BookInfo bookInfo) {
         bookService.save(bookInfo);
         Stand_Result result=new Stand_Result();
@@ -25,7 +25,7 @@ public class BookController {
     }
 
     //修改书籍信息
-    @PutMapping("/Book")
+    @PutMapping("/v1/Book")
     public Stand_Result Update(@RequestBody BookInfo bookInfo) {
         bookService.deleteById(bookInfo.getId());
         bookService.save(bookInfo);
@@ -38,8 +38,8 @@ public class BookController {
     }
 
     //删除书籍信息
-    @DeleteMapping("/Book")
-    public Stand_Result DeleteBook(@RequestParam(value = "id") String id) {
+    @DeleteMapping("/v1/Book/{id}")
+    public Stand_Result DeleteBook(@PathVariable("id") String id) {
 
         bookService.deleteById(id);
         Stand_Result result=new Stand_Result();
@@ -52,16 +52,16 @@ public class BookController {
 
     //查找书籍信息
     @ResponseBody
-    @GetMapping("/Book")
-    public BookInfo QueryBook(@RequestParam(value="id") String id){
+    @GetMapping("/v1/Book/{id}")
+    public BookInfo QueryBook(@PathVariable("id") String id){
 
         BookInfo bookInfo=bookService.findById(id);
         return bookInfo;
     }
 
     //查找部分书籍
-    @GetMapping("/Books")
-    public List QuerySomeBook(@RequestParam(value="count") int count){
+    @GetMapping("/v1/Books/{count}")
+    public List QuerySomeBook(@PathVariable("count") int count){
         int index=0;
         List books=new ArrayList();
         List bookList=bookService.findAll();
