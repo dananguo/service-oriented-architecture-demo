@@ -3,9 +3,7 @@ package com.soa.indexshowservice.controller;
 import com.soa.indexshowservice.remote.BookRemote;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +15,13 @@ import java.util.List;
  **/
 @EnableSwagger2Doc
 @RestController
+@RequestMapping("/v1")
 public class IndexShowController {
     @Autowired
     BookRemote bookRemote;
 
-    @GetMapping("/IndexShow")
-    public List showIndex(@RequestParam(value = "count") int count){
+    @GetMapping("/Index/{count}")
+    public List showIndex(@PathVariable(value = "count") int count){
         return bookRemote.QuerySomeBook(count);
     }
 }

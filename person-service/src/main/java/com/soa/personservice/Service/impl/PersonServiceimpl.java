@@ -18,6 +18,11 @@ public class PersonServiceimpl implements PersonService {
     {
         return personRepository.findById(id).get();
     }
+
+    @Override
+    public List<Person> findByName(String name){
+        return personRepository.findByName(name);
+    }
     @Override
     public List<Person> findAll()  {
         return personRepository.findAll();

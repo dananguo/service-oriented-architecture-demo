@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @EnableSwagger2Doc
 @RestController
 public class PersonController {
@@ -59,6 +62,31 @@ public class PersonController {
         return personInfo;
     }
 
+    @GetMapping("/get-all")
+    public List findAll(){
+        return personService.findAll();
+    }
+
+
+    @GetMapping("/v1/person-by-name/{name}")
+    public List QueryPersonByName(@PathVariable(value = "name")String name){
+        List personList=new ArrayList();
+        for(Person person:personService.findByName(name)){
+            PersonInfo personInfo=new PersonInfo();
+            personInfo.setAge(person.getAge());
+            personInfo.setName(person.getName());
+            personInfo.setId(person.getId());
+            personInfo.setSex(person.getSex());
+            personInfo.setCountry(person.getCountry());
+            personInfo.setSignature(person.getSignature());
+            personInfo.setPhone(person.getPhone());
+            personInfo.setE_mail(person.getEmail());
+            personList.add(personInfo);
+
+        }
+        return personList;
+    }
+
     //修改个人信息
 
     @PutMapping("/v1/Person")
@@ -82,6 +110,8 @@ public class PersonController {
         /*未添加时间*/
         return result;
     }
+
+
 
     //删除个人信息
 

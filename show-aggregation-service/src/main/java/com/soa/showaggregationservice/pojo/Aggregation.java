@@ -11,9 +11,11 @@ import lombok.Data;
  **/
 @Data
 public class Aggregation {
-    private BookInfo bookInfo;
-    private PersonInfo personInfo;
-    private Book book;
+
+    private String book_title;
+    private double book_price;
+    private String user_name;
+    private int inventory_quantity;
 
 
     @Override

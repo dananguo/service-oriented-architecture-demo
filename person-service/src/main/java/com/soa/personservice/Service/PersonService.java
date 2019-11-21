@@ -10,6 +10,8 @@ public interface PersonService {
 
     public Person findById(String id);
 
+    public List<Person> findByName(String name);
+
     public List<Person> findAll();
 
     public int modifyAgeById(int age, String id);

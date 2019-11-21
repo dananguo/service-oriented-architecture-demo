@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.List;
 @Service
 public class BookServiceimpl implements BookService {
@@ -27,8 +26,23 @@ public class BookServiceimpl implements BookService {
     }
 
     @Override
-    public BookInfo findById(String book_id) {
-        return bookInfoRepository.findById(book_id).get();
+    public BookInfo findById(String id) {
+        return bookInfoRepository.findById(id).get();
+
+
+    }
+
+    @Override
+    public List<BookInfo> findByBookName(String book_title) {
+
+        if (book_title != null ) {
+            Query query = new Query(Criteria.where("book_title").is(book_title));
+            return publicDao.query(query,BookInfo.class);
+        }
+        else
+            return null;
+
+
     }
 
     @Override

@@ -59,6 +59,15 @@ public class BookController {
         return bookInfo;
     }
 
+    //通过书名查找书籍信息
+    @ResponseBody
+    @GetMapping("/v1/book-by-title/{title}")
+    public List<BookInfo> QueryBookByTitle(@PathVariable(value="title") String title){
+
+        return bookService.findByBookName(title);
+
+    }
+
     //查找部分书籍
     @GetMapping("/v1/Books/{count}")
     public List QuerySomeBook(@PathVariable("count") int count){
@@ -74,6 +83,7 @@ public class BookController {
         }
         return books;
     }
+
 
 }
 

@@ -16,6 +16,8 @@ public interface BookService {
 
     public BookInfo findById(String book_id);
 
+    public List<BookInfo> findByBookName(String book_title);
+
     public List<BookInfo> findAll();
 
     public void updateTitleById(String book_id,String book_title);
