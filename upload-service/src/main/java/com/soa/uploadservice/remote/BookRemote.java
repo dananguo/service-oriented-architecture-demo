@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.print.Book;
 
 @Primary
-@FeignClient(name= "book-service")
+@FeignClient(name= "book-service",fallback = BookRemoteHystrix.class)
 public interface BookRemote {
     //新建书籍信息
     @PostMapping("/Book")
