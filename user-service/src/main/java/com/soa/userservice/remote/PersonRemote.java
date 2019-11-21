@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.*;
 public interface PersonRemote {
     //新建个人信息
 
-    @PostMapping("/Person")
+    @PostMapping("/v1/Person")
     public Stand_Result NewPerson(@RequestBody PersonInfo personInfo);
 
     //查询个人信息
 
-    @GetMapping("/Person")
-    public PersonInfo QueryPerson(@RequestParam(value = "id") String id);
+    @GetMapping("/v1/Person/{id}")
+    public PersonInfo QueryPerson(@PathVariable("id") String id);
 
     //修改个人信息
 
-    @PutMapping("/Person")
+    @PutMapping("/v1/Person")
     public Stand_Result Update(@RequestBody PersonInfo personInfo);
 
     //删除个人信息
 
-    @DeleteMapping("/Person")
-    public Stand_Result Delete(@RequestParam(value = "id") String id);
+    @DeleteMapping("/v1/Person/{id}")
+    public Stand_Result Delete(@PathVariable("id") String id);
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name= "book-service",fallback = BookRemoteHystrix.class)
 public interface BookRemote {
     //获取书籍信息
-    @GetMapping("/Book")
-    public BookInfo QueryBook(@RequestParam(value = "id") String id);
+    @GetMapping("/v1/Book/{id}")
+    public BookInfo QueryBook(@PathVariable("id") String id);
 
 }

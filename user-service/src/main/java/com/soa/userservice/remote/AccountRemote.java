@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name= "account-service",fallback = AccountRemoteHystrix.class)
 public interface AccountRemote {
     //新建账户
-    @PostMapping("/Account")
+    @PostMapping("/v1/Account")
     public Sign_up_Result CreateNew(@RequestBody Sign_up_params sign_up_params);
 
     //查询账户
-    @GetMapping("/Account")
-    public AccountInfo QueryAccount(@RequestParam(value = "id") String id);
+    @GetMapping("/v1/Account/{id}")
+    public AccountInfo QueryAccount(@PathVariable("id") String id);
     //修改账户
-    @PutMapping("/Account")
+    @PutMapping("/v1/Account")
     public Stand_Result Update(@RequestBody AccountInfo accountInfo);
     //删除账户
-    @DeleteMapping("/Account")
-    public Stand_Result Delete(@RequestParam(value = "id") String id);
+    @DeleteMapping("/v1/Account/{id}")
+    public Stand_Result Delete(@PathVariable("id") String id);
 
 }

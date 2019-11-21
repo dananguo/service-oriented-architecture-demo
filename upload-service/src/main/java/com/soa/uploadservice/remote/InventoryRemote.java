@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name= "inventory-service",fallback = InventoryRemoteHystrix.class)
 public interface InventoryRemote {
     //新建库存
-    @PostMapping("/Inventory")
+    @PostMapping("/v1/Inventory")
     public String  NewInventory(@RequestBody Book book);
 
     //修改库存
-    @PutMapping("/Inventory")
+    @PutMapping("/v1/Inventory")
     public Stand_Result Update(@RequestBody Book book);
 
     //删除库存
-    @DeleteMapping("/Inventory")
-    public Stand_Result DeleteInventory(@RequestParam(value = "id") String id);
+    @DeleteMapping("/v1/Inventory/{id}")
+    public Stand_Result DeleteInventory(@PathVariable("id") String id);
 }

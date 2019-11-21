@@ -5,6 +5,7 @@ import com.soa.indexshowservice.pojo.BookInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -13,6 +14,6 @@ import java.util.List;
 @FeignClient(name= "book-service")
 public interface BookRemote {
 
-    @GetMapping("/Books")
-    public List QuerySomeBook(@RequestParam(value="count") int count);
+    @GetMapping("/v1/Books/{count}")
+    public List QuerySomeBook(@PathVariable("count") int count);
 }

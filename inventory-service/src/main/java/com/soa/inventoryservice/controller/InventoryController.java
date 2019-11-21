@@ -15,7 +15,7 @@ public class InventoryController {
     private InventoryService inventoryService;
 
     //新建库存
-    @PostMapping("/Inventory")
+    @PostMapping("/v1/Inventory")
     public String NewInventory(@RequestBody Book book) {
         inventoryService.save(book);
 
@@ -23,7 +23,7 @@ public class InventoryController {
     }
 
     //修改库存
-    @PutMapping("/Inventory")
+    @PutMapping("/v1/Inventory")
     public Stand_Result Update(@RequestBody Book book) {
         inventoryService.save(book);
 
@@ -35,8 +35,8 @@ public class InventoryController {
     }
 
     //删除库存
-    @DeleteMapping("/Inventory")
-    public Stand_Result DeleteInventory(@RequestParam(value = "id") String id) {
+    @DeleteMapping("/v1/Inventory/{id}")
+    public Stand_Result DeleteInventory(@PathVariable("id") String id) {
         inventoryService.delete(id);
         Stand_Result result=new Stand_Result();
         result.setSucceed(true);
@@ -44,8 +44,9 @@ public class InventoryController {
         /*未加入操作时间*/
         return result;
     }
-    @GetMapping("/Inventory")
-    public Book QueryInventory(@RequestParam(value="id") String id){
+    //查询库存
+    @GetMapping("/v1/Inventory/{id}")
+    public Book QueryInventory(@PathVariable("id") String id){
         return inventoryService.findById(id);
     }
 
