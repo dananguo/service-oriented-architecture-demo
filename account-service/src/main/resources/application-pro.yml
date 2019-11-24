@@ -8,7 +8,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://peer1:9000/eureka/ # 需要改动
+      defaultZone: http://47.96.156.169:9000/eureka/,http://123.57.144.153:9000/eureka/
 feign:
   hystrix:
     enabled: true

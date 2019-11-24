@@ -12,4 +12,4 @@ turbine:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://peer1:9000/eureka/ # 需要改动
+      defaultZone: http://47.96.156.169:9000/eureka/
