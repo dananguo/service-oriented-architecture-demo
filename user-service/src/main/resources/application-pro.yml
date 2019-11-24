@@ -1,14 +1,14 @@
 server:
-  port: 8094
+  port: 8080
 spring:
   profiles:
-    active: peer1
+    active: pro
   application:
-    name: book-service
+    name: user-service
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:9000/eureka/ # 需要改动
+      defaultZone: http://peer1:9000/eureka/ # 需要改动
 feign:
   hystrix:
     enabled: true
