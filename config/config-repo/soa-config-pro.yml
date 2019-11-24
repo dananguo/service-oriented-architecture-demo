@@ -1,0 +1,14 @@
+users:
+  list:
+    -
+      username: 'admin1'
+      password: 'password'
+    -
+      username: 'admin2'
+      password: 'password'
+    -
+      username: 'user1'
+      password: 'password'
+    -
+      username: 'user2'
+      password: 'password'
