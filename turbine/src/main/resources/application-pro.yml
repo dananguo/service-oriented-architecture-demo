@@ -2,7 +2,7 @@ spring:
   application:
     name: hystrix-dashboard-turbine
 server:
-  port: 8080
+  port: 8083
 turbine:
   app-config: "spring-cloud-consumer,money-service,index-show-service,book-service,account-service,\
     book-show-service,index-show-service,show-aggregation-service,upload-service"
