@@ -11,7 +11,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://peer2:9000/eureka
+      defaultZone: http://peer2:9000/eureka/,http://peer1:9000/eureka/
 management:
   endpoints:
     web:
