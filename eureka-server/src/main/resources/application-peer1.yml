@@ -6,12 +6,16 @@ server:
   port: 9000
 eureka:
   instance:
-    hostname: peer1
+    #要求Client通过ip的方式进行注册
+    prefer-ip-address: true
+    instance-id: springcloud-eurekaserver-A8-118
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://peer2:9000/eureka/,http://peer1:9000/eureka/
+      defaultZone: http://123.57.144.153:9000/eureka/
+
+
 management:
   endpoints:
     web:
