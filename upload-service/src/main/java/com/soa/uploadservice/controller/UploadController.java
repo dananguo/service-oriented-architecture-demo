@@ -70,12 +70,7 @@ public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTem
             rabbitTemplate.convertAndSend("Inventory","NewInventory",book,correlationData1);
 
             CorrelationData correlationData2=new CorrelationData(UUID.randomUUID().toString());
-            rabbitTemplate.convertAndSend("Book", "NewBook", bookInfo, new MessagePostProcessor() {
-                @Override
-                public Message postProcessMessage(Message message) throws AmqpException {
-                    message.getMessageProperties().setHeader("","");
-                }
-            }, correlationData2);
+            rabbitTemplate.convertAndSend("Book", "NewBook", bookInfo,  correlationData2);
 
         }catch (Exception e)
         {
