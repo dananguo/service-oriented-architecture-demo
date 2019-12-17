@@ -13,7 +13,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://123.57.144.153:9000/eureka/
+      defaultZone: http://eureka_node1:9000/eureka/
 
 
 management:

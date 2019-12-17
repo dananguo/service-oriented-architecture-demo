@@ -1,0 +1,19 @@
+server:
+  port: 8092
+spring:
+  profiles:
+    active: test
+  application:
+    name: user-show-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka_node2:9000/eureka/
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
