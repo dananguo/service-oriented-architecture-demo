@@ -4,6 +4,7 @@ spring:
   profiles: peer2
 server:
   port: 9000
+  address: 0.0.0.0
 eureka:
   instance:
     #要求Client通过ip的方式进行注册
@@ -13,7 +14,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka-node2:9000/eureka/
+      defaultZone: http://eureka-node2:9000/eureka/,http://eureka-node1:9000/eureka/
 
 
 management:
