@@ -14,7 +14,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka-node1:9000/eureka/,http://eureka-node2:9000/eureka/
+      defaultZone: http://192.168.0.21:9000/eureka/,http://192.168.0.22:9000/eureka/
 
 
 management:
