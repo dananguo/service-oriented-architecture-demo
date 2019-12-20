@@ -7,6 +7,7 @@ import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -70,13 +71,13 @@ public class BookController {
 
     //查找部分书籍
     @GetMapping("/v1/Books/{count}")
-    public List QuerySomeBook(@PathVariable("count") int count){
+    public List<BookInfo> QuerySomeBook(@PathVariable("count") int count){
         int index=0;
-        List books=new ArrayList();
+        List<BookInfo> books=new ArrayList<>();
         List bookList=bookService.findAll();
         Random random=new Random();
         while(index<count&&index<bookList.size()){
-            books.add(bookList.get(random.nextInt(bookList.size())));
+            books.add((BookInfo)bookList.get(random.nextInt(bookList.size())));
             index++;
 
 
