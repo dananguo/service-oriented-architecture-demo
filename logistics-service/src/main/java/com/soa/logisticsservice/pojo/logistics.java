@@ -1,4 +1,4 @@
-package com.soa.purchaseservice.pojo;
+package com.soa.logisticsservice.pojo;
 
 
 import lombok.Data;

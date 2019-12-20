@@ -1,4 +1,4 @@
-package com.soa.purchaseservice.pojo;
+package com.soa.orderservice.pojo;
 
 
 import com.alibaba.fastjson.JSON;

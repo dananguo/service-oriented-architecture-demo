@@ -1,7 +1,8 @@
 package com.soa.purchaseservice.Remote;
 
-import com.soa.uploadservice.pojo.Book;
-import com.soa.uploadservice.pojo.Stand_Result;
+
+import com.soa.purchaseservice.pojo.Book;
+import com.soa.purchaseservice.pojo.Stand_Result;
 import org.springframework.stereotype.Component;
 
 @Component
