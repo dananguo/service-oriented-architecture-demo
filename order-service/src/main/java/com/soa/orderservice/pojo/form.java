@@ -13,12 +13,12 @@ import java.sql.Timestamp;
 
 @Data
 @Entity(name="form")
-public class order {
+public class form {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    @Column(name = "order_id")
+    @Column(name = "_id")
     private String  orderId;
 
     @Column(name = "customer_id")

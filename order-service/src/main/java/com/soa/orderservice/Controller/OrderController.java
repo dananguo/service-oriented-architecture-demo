@@ -1,9 +1,10 @@
 package com.soa.orderservice.Controller;
 
-
 import com.rabbitmq.client.Channel;
 import com.soa.orderservice.pojo.PurchaseParam;
-import com.soa.orderservice.pojo.order;
+
+import com.soa.orderservice.pojo.form;
+
 import com.soa.orderservice.service.OrderService;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,8 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/v1/order/{id}")
-    public List<order> FindOrderByID(@PathVariable("id") String id)
+
+    public List<form> FingOrderByID(@PathVariable("id") String id)
     {
         return orderService.FindByCustomerId(id);
     }
