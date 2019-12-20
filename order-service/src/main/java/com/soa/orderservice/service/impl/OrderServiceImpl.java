@@ -22,4 +22,9 @@ public class OrderServiceImpl implements OrderService {
     public List<order> FindAll() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public void save(order neworder) {
+        orderRepository.save(neworder);
+    }
 }

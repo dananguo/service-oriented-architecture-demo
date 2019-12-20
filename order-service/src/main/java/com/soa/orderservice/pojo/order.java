@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Data
-@Entity(name="order")
+@Entity(name="form")
 public class order {
 
     @Id

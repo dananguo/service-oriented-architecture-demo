@@ -13,5 +13,5 @@ import java.util.List;
 public interface OrderRemote {
 
     @GetMapping("/v1/order/{id}")
-    public List<order> FingOrderByID(@PathVariable("id") String id);
+    public List<order> FindOrderByID(@PathVariable("id") String id);
 }

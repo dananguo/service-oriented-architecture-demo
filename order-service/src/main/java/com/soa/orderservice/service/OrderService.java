@@ -11,4 +11,5 @@ public interface OrderService {
 
     public List<order> FindByCustomerId(String id);
     public List<order> FindAll();
+    public void save(order neworder);
 }

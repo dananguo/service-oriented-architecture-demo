@@ -20,4 +20,8 @@ public interface InventoryRemote {
     //删除库存
     @DeleteMapping("/v1/Inventory/{id}")
     public Stand_Result DeleteInventory(@PathVariable("id") String id);
+
+    //获取剩余库存
+    @GetMapping("/v1/Inventory/{id}")
+    public Book QueryInventory(@PathVariable("id") String id);
 }
