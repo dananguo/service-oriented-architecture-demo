@@ -1,0 +1,20 @@
+server:
+  port: 8090
+  address: 0.0.0.0
+spring:
+  profiles:
+    active: test
+  application:
+    name: upload-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.22:9000/eureka/
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
