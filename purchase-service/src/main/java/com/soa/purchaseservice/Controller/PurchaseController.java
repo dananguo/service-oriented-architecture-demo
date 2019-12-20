@@ -4,6 +4,7 @@ package com.soa.purchaseservice.Controller;
 import com.netflix.discovery.converters.Auto;
 import com.soa.purchaseservice.Remote.*;
 import com.soa.purchaseservice.pojo.Stand_Result;
+import com.soa.purchaseservice.pojo.order;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import io.swagger.annotations.ApiOperation;
 import org.junit.jupiter.api.Order;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @EnableSwagger2Doc
 @RestController
@@ -28,8 +31,8 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
 //    LogisticsRemote logisticsRemote;
 //    @Autowired
 //    MoneyRemote moneyRemote;
-//    @Autowired
-//    OrderRemote orderRemote;
+    @Autowired
+    OrderRemote orderRemote;
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -38,6 +41,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     @PostMapping("/v1/Purchase")
     public Stand_Result Purchase()
     {
+
 
         Stand_Result result= new Stand_Result();
         result.setSucceed(true);
@@ -61,16 +65,25 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     }
 
     //查看订单
-    @GetMapping("/v1/Purchase")
-    public Stand_Result CheckPurchase()
+    @GetMapping("/v1/Purchase/{id}")
+    public List<order> CheckPurchase(String user_id)
     {
-        return new Stand_Result();
+        List<order> list= orderRemote.FingOrderByID(user_id);
+        return list;
     }
     //查看物流
     @GetMapping("/v1/Logistics")
     public Stand_Result CheckLogistics()
     {
-        return new Stand_Result();
+
+
+
+
+        Stand_Result result= new Stand_Result();
+        result.setSucceed(true);
+        result.setWrongCode("0");
+        result.setTime(null);
+        return result;
     }
 
     @Override

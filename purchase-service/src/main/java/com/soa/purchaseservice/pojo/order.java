@@ -21,8 +21,8 @@ public class order {
     @Column(name = "order_id")
     private String  order_id;
 
-    @Column(name = "customer_id")
-    private String  customer_id;
+    @Column(name = "customerid")
+    private String  customerid;
 
     @Column(name = "book_id")
     private String  book_id;
