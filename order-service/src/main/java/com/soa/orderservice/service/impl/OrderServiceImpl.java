@@ -1,6 +1,6 @@
 package com.soa.orderservice.service.impl;
 
-import com.soa.orderservice.pojo.order;
+import com.soa.orderservice.pojo.form;
 import com.soa.orderservice.repository.OrderRepository;
 import com.soa.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,12 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Override
-    public List<order> FindByCustomerId(String id) {
+    public List<form> FindByCustomerId(String id) {
        return orderRepository.findByCustomerId(id);
     }
 
     @Override
-    public List<order> FindAll() {
+    public List<form> FindAll() {
         return orderRepository.findAll();
     }
 }
