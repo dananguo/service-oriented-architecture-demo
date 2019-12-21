@@ -9,7 +9,9 @@ import java.util.List;
 @Service
 public interface OrderService {
 
-    public List<form> FindByCustomerId(String id);
-    public List<form> FindAll();
-
+    public List<form> findByCustomerId(String id);
+    public List<form> findAll();
+    public void save(form neworder);
+    public form findByOrderId(String id );
+    public void DeleteOrder(String id);
 }

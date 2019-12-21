@@ -13,19 +13,19 @@ import java.sql.Timestamp;
 
 @Data
 @Entity(name="form")
-public class order {
+public class form {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    @Column(name = "order_id")
-    private String  order_id;
+    @Column(name = "_id")
+    private String  orderId;
 
-    @Column(name = "customerid")
-    private String  customerid;
+    @Column(name = "customer_id")
+    private String  customerId;
 
     @Column(name = "book_id")
-    private String  book_id;
+    private String bookId;
 
     @Column(name = "state")
     private boolean state;
@@ -34,13 +34,8 @@ public class order {
     private Timestamp time;
 
     @Column(name = "single_price")
-    private int single_price;
+    private int singlePrice;
 
     @Column(name = "book_num")
-    private int book_num;
-
-    @Override
-    public String toString() {
-        return JSON.toJSONString(this);
-    }
+    private int bookNum;
 }

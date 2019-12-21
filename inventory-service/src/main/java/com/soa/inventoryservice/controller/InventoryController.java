@@ -74,6 +74,16 @@ public void NewInventory(@Payload Book book, Channel channel, @Header(AmqpHeader
                 rabbitTemplate.convertAndSend("Order","NewOrder",purchaseParam,correlationData1);
                 channel.basicAck(delivertTag,false);
             }
+            else //此时，如果是为了取消订单，则创建删除订单任务。
+            {
+                rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+                rabbitTemplate.setMandatory(true);
+                rabbitTemplate.setConfirmCallback(this);
+                rabbitTemplate.setReturnCallback(this);
+                CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
+                rabbitTemplate.convertAndSend("Order","DeleteOrder",purchaseParam,correlationData1);
+                channel.basicAck(delivertTag,false);
+            }
         }
         else
         {

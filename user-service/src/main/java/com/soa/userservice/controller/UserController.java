@@ -4,19 +4,28 @@ import com.soa.userservice.pojo.*;
 import com.soa.userservice.remote.AccountRemote;
 import com.soa.userservice.remote.PersonRemote;
 import com.spring4all.swagger.EnableSwagger2Doc;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
+
 @EnableSwagger2Doc
 @RestController
-public class UserController {
+public class UserController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired
     AccountRemote accountRemote;
     @Autowired
     PersonRemote personRemote;
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     @PostMapping("/v1/User/login")
     @ResponseBody
@@ -42,7 +51,6 @@ public class UserController {
        }
         return result;
     }
-
     @PutMapping("/v1/User/Account")
     @ResponseBody
     public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)
@@ -53,11 +61,19 @@ public class UserController {
     }
     @PostMapping("/v1/User/Account")
     @ResponseBody
-    public Sign_up_Result CreateAccount(@RequestBody Sign_up_params sign_up)
+    public Stand_Result CreateAccount(@RequestBody Sign_up_params signUp)
     {
         //调用基础服务得到结果,然后写聚合结果。
-        Sign_up_Result result=accountRemote.CreateNew(sign_up);
-        return result;
+        //先建账户，然后补单积分和个人信息
+
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setMandatory(true);
+        rabbitTemplate.setConfirmCallback(this);
+        rabbitTemplate.setReturnCallback(this);
+        CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
+        rabbitTemplate.convertAndSend("Account","NewAccount",signUp,correlationData1);
+
+        return null;
     }
 
     @PostMapping("/v1/User/PersonInfo")
@@ -94,5 +110,15 @@ public class UserController {
     {
         Stand_Result result=personRemote.Delete(id);
         return result;
+    }
+
+    @Override
+    public void confirm(CorrelationData correlationData, boolean b, String s) {
+
+    }
+
+    @Override
+    public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+
     }
 }
