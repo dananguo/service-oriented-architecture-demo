@@ -11,7 +11,7 @@
     <groupId>com.soa</groupId>
     <artifactId>money-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>money-service</name>
+    <name>upload-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -157,6 +157,16 @@
             <artifactId> spring-boot-configuration-processor </artifactId>
             <optional> true </optional>
         </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
 
         <!--Swagger集成依赖-->
         <dependency>
@@ -168,6 +178,28 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.0</version>
+        </dependency>
+        <!--RabbitMQ集成-->
+
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-amqp</artifactId>
+
+        </dependency>
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-test</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.2.3.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -189,6 +221,22 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -199,4 +247,5 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
+
 </project>
