@@ -15,6 +15,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,13 +89,13 @@ public void NewBook(@Payload BookInfo bookInfo, Channel channel, @Header(AmqpHea
 
     //查找部分书籍
     @GetMapping("/v1/Books/{count}")
-    public List QuerySomeBook(@PathVariable("count") int count){
+    public List<BookInfo> QuerySomeBook(@PathVariable("count") int count){
         int index=0;
-        List books=new ArrayList();
+        List<BookInfo> books=new ArrayList<>();
         List bookList=bookService.findAll();
         Random random=new Random();
         while(index<count&&index<bookList.size()){
-            books.add(bookList.get(random.nextInt(bookList.size())));
+            books.add((BookInfo)bookList.get(random.nextInt(bookList.size())));
             index++;
 
 

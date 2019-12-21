@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: hystrix-dashboard-turbine
+server:
+  port: 8083
+  address: 0.0.0.0
+turbine:
+  app-config: "spring-cloud-consumer,money-service,index-show-service,book-service,account-service,\
+    book-show-service,index-show-service,show-aggregation-service,upload-service"
+  aggregator:
+    cluster-config: "default"
+  cluster-name-expression: new String("default")
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.22:9000/eureka/

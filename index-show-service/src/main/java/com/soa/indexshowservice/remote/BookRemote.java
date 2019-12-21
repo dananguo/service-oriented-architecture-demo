@@ -15,5 +15,5 @@ import java.util.List;
 public interface BookRemote {
 
     @GetMapping("/v1/Books/{count}")
-    public List QuerySomeBook(@PathVariable("count") int count);
+    public List<BookInfo> QuerySomeBook(@PathVariable("count") int count);
 }
