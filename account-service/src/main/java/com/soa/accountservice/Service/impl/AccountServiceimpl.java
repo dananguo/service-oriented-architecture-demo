@@ -38,4 +38,17 @@ public class AccountServiceimpl implements AccountService {
     public void deleteAll() {
         accountRepository.deleteAll();
     }
+
+    @Override
+    public boolean checkAccount(String id) {
+        if(accountRepository.findByAccount(id)!=null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
 }

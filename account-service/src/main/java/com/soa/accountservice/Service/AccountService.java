@@ -16,4 +16,6 @@ public interface AccountService {
     public void save(Account account);
 
     public void deleteAll();
+
+    public boolean checkAccount(String id);
 }

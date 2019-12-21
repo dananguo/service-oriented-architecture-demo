@@ -41,6 +41,10 @@ public class LogisticsController {
             newlogistics.setUserid(payPrama.userId);
             logisticsService.NewLogistics(newlogistics);
             channel.basicAck(deleverTag,true);
+
+
+
+
         }catch (Exception e)
         {
             //创建物流失败，重试

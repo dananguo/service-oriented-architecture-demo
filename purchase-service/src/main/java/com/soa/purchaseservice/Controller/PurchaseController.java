@@ -45,6 +45,8 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     @PostMapping("/v1/Purchase")
     public Stand_Result Purchase(@RequestBody PurchaseParam purchaseParam)
     {
+        String id=UUID.randomUUID().toString();//生成订单id
+        purchaseParam.Order_id=id;
         //交给库存服务
         try {
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
@@ -61,7 +63,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
         Stand_Result result= new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");
-        result.setTime(null);
+        result.setTime(id);
 
         return result;
     }
@@ -70,7 +72,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     @DeleteMapping("/v1/Purchase/{id}")
     public Stand_Result CanclePurchase(@PathVariable("id") String id)
     {
-//交给库存服务
+        //交给库存服务
         try {
             PurchaseParam purchaseParam=new PurchaseParam();
             form order=orderRemote.GetOrder(id);

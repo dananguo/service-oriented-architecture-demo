@@ -51,6 +51,7 @@ public class OrderController implements RabbitTemplate.ReturnCallback,RabbitTemp
     {
         try{
             form neworder=new form();
+            neworder.setOrderId(purchaseParam.Order_id);
             neworder.setBookId(purchaseParam.Book_id);
             neworder.setBookNum(purchaseParam.Num);
             neworder.setCustomerId(purchaseParam.User_id);
@@ -94,6 +95,7 @@ public class OrderController implements RabbitTemplate.ReturnCallback,RabbitTemp
                     if(order.isState())//已经支付过了
                     {
                         channel.basicReject(deleverTag,false);
+                        return;
                     }
                     payPrama.totalPrice=order.getSinglePrice()*order.getBookNum();//计算总价并填入
                     rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());

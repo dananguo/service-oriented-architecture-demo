@@ -89,6 +89,12 @@ public class AccountController implements RabbitTemplate.ReturnCallback,RabbitTe
         return accountInfo;
     }
 
+    //查重账户
+    @GetMapping("/v1/Account/New/{id}")
+    public boolean CheckAccount(@PathVariable("id") String id)
+    {
+        return accountService.checkAccount(id);
+    }
     //修改账户
     @PutMapping("/v1/Account")
     public Stand_Result Update(@RequestBody AccountInfo accountInfo) {

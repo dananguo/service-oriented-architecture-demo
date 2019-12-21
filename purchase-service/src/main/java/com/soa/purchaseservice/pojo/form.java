@@ -16,8 +16,6 @@ import java.sql.Timestamp;
 public class form {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     @Column(name = "_id")
     private String  orderId;
 
