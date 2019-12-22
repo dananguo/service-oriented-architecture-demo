@@ -55,14 +55,19 @@ public class AuthFilter extends ZuulFilter {
     public Object run() {
         RequestContext requestContext = RequestContext.getCurrentContext();
         String token = requestContext.getRequest().getHeader("Bearer");
-        JWTUtils jwtUtils = JWTUtils.getInstance(System.getProperty("rsa.modulus"), System.getProperty("rsa.privateExponent"), System.getProperty("rsa.publicExponent"));
-
+//        // 以下为动态配置
+//        JWTUtils jwtUtils = JWTUtils.getInstance(System.getProperty("rsa.modulus"), System.getProperty("rsa.privateExponent"), System.getProperty("rsa.publicExponent"));
+        JWTUtils jwtUtils =JWTUtils.getInstance();
         // 白名单，放过
-        List<String> whiteApis = Arrays.asList(this.filterProperties.getWhitelist());
+        List<String> whiteApis =this.filterProperties.getWhitelist();
         String uri = requestContext.getRequest().getRequestURI();
-        if (whiteApis.contains(uri)) {
-            return null;
+
+        for(String wapi : whiteApis){
+            if (uri.contains(wapi)){
+                return null;
+            }
         }
+
         // path uri 处理
         for (String wapi : whiteApis) {
             if (wapi.contains("{") && wapi.contains(")")) {

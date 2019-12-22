@@ -41,7 +41,9 @@ public class AuthServiceImpl implements AuthService {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 result.setLogin_Time(df.format(new Date()));
                 //2.查询结果不为空，则生成token
-                String token = JWTUtils.getToken(account);
+                String id = accountInfo.getId();
+                JWTUtils jwtUtils = JWTUtils.getInstance();
+                String token = jwtUtils.getToken(id);
                 result.setToken(token);
             } else {
                 result.setLogin_Time(null);

@@ -16,3 +16,7 @@ soa:
     whitelist:
       - user-service/v1/User/login
       - auth-service/v1/User/login
+      - /swagger-resources
+      - /v2/api-docs
+      - /swagger-ui
+      - /swagger-resources
