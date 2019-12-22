@@ -53,6 +53,7 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+
         RequestContext requestContext = RequestContext.getCurrentContext();
         String token = requestContext.getRequest().getHeader("Bearer");
 //        // 以下为动态配置

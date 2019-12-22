@@ -32,8 +32,9 @@ public class UserShowController {
     @Autowired
     HttpServletRequest request;
 
-    @GetMapping("/user-show-by-id/{id}")
-    public Result showUser(@PathVariable(value = "id") String id){
+    @GetMapping("/user-show-by-id/")
+    public Result showUser(){
+        String  id=request.getHeader("uid");
         Result result=new Result();
         PersonInfo personInfo=personRemote.QueryPerson(id);
         List<UploadProduct> uploadProducts=new ArrayList<>();
