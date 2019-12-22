@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,18 @@ public class UserShowController {
     OrderRemote orderRemote;
     @Autowired
     BookRemote bookRemote;
+
+    @Autowired
+    HttpServletRequest request;
+
     @GetMapping("/user-show-by-id/{id}")
-    public Result showUser(@PathVariable("id") String id){
+    public Result showUser(@PathVariable(value = "id") String id){
         Result result=new Result();
         PersonInfo personInfo=personRemote.QueryPerson(id);
         List<UploadProduct> uploadProducts=new ArrayList<>();
-        if(personInfo==null)
+        if(personInfo==null) {
             return result;
+        }
         else{
             result.setUser_id(id);
             result.setUser_name(personInfo.getName());

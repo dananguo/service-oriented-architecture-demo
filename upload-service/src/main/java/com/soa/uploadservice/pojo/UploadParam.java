@@ -10,6 +10,6 @@ public class UploadParam {
     public String describe;
     public String string_price;
     public String user_id;
-    public double book_price;
+    public int book_price;
     public int inventory_quantity;
 }

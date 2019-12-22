@@ -9,6 +9,7 @@ import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class ShowAggregationController {
     @Autowired
     InventoryRemote inventoryRemote;
 
+    @Autowired
+    HttpServletRequest request;
 
 //    @GetMapping("/ShowAggregation")
 //    public String aggregationShow(@RequestParam("id") String id){
@@ -48,8 +51,9 @@ public class ShowAggregationController {
 //       return aggregation.toString();
 //    }
 
-    @GetMapping("/aggregation-by-id/{id}")
-    public Aggregation show(@PathVariable("id") String id){
+    @GetMapping("/aggregation-by-id")
+    public Aggregation show(){
+        String id=request.getHeader("uid");
         Aggregation aggregation=new Aggregation();
         BookInfo book=bookShowRemote.bookInfoShowById(id);
         aggregation.setBook_title(book.getBook_title());

@@ -31,7 +31,7 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    @PostMapping("/v1/User/login")
+    /*@PostMapping("/v1/User/login")
     @ResponseBody
     public LoginResult login(@RequestBody LoginParams params){
         //调基础服务拿到结果
@@ -55,7 +55,7 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
            result.setWromgCode(1);
        }
         return result;
-    }
+    }*/
     @PutMapping("/v1/User/Account")
     @ResponseBody
     public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)

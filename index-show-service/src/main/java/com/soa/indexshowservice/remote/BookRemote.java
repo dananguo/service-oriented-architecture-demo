@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Primary
-@FeignClient(name= "book-service",fallback = BookRemoteHystrix.class)
+@FeignClient(name= "book-service")
 public interface BookRemote {
 
     @GetMapping("/v1/Books/{count}")

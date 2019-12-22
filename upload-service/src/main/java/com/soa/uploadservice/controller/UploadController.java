@@ -22,6 +22,8 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.message.callback.SecretKeyCallback;
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -32,6 +34,10 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @RestController
 @Slf4j
 public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback {
+
+    @Autowired
+    HttpServletRequest request;
+
     @Autowired
     BookRemote bookRemote;
     @Autowired
@@ -48,9 +54,11 @@ public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTem
         //生成随机id
         String id=UUID.randomUUID().toString();
         book.setBook_id(id);
-        book.setUser_id(uploadParam.getUser_id());
+        //book.setUser_id(uploadParam.getUser_id());
+        //改为从token获取id
+        book.setUser_id(request.getHeader("uid"));
         book.setBook_price(uploadParam.getBook_price());
-        book.setInventory_quantity(uploadParam.getInventory_quantity());
+        book.setInventory_quantity(1);
 
         bookInfo.setId(id);
         bookInfo.setBook_id(book.getBook_id());
@@ -58,7 +66,7 @@ public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTem
         bookInfo.setBook_type(uploadParam.getBook_type());
         bookInfo.setPicture_url(uploadParam.getPicture_url());
         bookInfo.setPublisher(uploadParam.getPublisher());
-        bookInfo.setAuthor(uploadParam.getAuthor());
+        //bookInfo.setAuthor(uploadParam.getAuthor());
         bookInfo.setDescribe(uploadParam.getDescribe());
         bookInfo.setBook_price(uploadParam.getString_price());
         //测试消息队列
