@@ -11,3 +11,12 @@ eureka:
     serviceUrl:
       defaultZone: http://192.168.0.22:9000/eureka/
 
+soa:
+  filter:
+    whitelist:
+      - user-service/v1/User/login
+      - auth-service/v1/User/login
+      - /swagger-resources
+      - /v2/api-docs
+      - /swagger-ui
+      - /swagger-resources
