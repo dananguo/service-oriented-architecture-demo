@@ -80,14 +80,22 @@ public class AccountController implements RabbitTemplate.ReturnCallback,RabbitTe
     //查询账户,现在已经改为用account查询
     @PostMapping("/v1/Account/{id}")
     public AccountInfo QueryAccount(@PathVariable("id") String id) {
-        Account account=new Account();
-        account=accountService.findByAccount(id);
-        AccountInfo accountInfo=new AccountInfo();
-        accountInfo.setId(account.get_id());
-        accountInfo.setAccount(account.getAccount());
-        accountInfo.setPwd(account.getPwd());
-        accountInfo.setRole(account.getRole());
-        return accountInfo;
+        Account account=accountService.findByAccount(id);
+        if(account==null)
+        {
+            AccountInfo accountInfo=new AccountInfo();
+            accountInfo.setAccount("无此账户");
+            return accountInfo;
+        }
+        else {
+            AccountInfo accountInfo=new AccountInfo();
+            accountInfo.setId(account.get_id());
+            accountInfo.setAccount(account.getAccount());
+            accountInfo.setPwd(account.getPwd());
+            accountInfo.setRole(account.getRole());
+            return accountInfo;
+        }
+
     }
 
     //查重账户

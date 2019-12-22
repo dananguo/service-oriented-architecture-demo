@@ -4,6 +4,7 @@ import com.soa.userservice.pojo.*;
 import com.soa.userservice.remote.AccountRemote;
 import com.soa.userservice.remote.PersonRemote;
 import com.spring4all.swagger.EnableSwagger2Doc;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -11,6 +12,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -18,6 +20,7 @@ import java.util.UUID;
 @EnableSwagger2Doc
 @RestController
 @CrossOrigin(maxAge = 3600,origins = "*")
+@Slf4j
 public class UserController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired
@@ -67,15 +70,67 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
     {
         //调用基础服务得到结果,然后写聚合结果。
         //先建账户，然后补单积分和个人信息
+        //先查看数据库中有无重名账户，有则返回错误码
+        try{
+            AccountInfo accountInfo= accountRemote.QueryAccount(signUp.Account);
+            if(accountInfo.getAccount().equals("无此账户"))
+            {
+                try {
+                    //可以开始创建
+                    rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+                    rabbitTemplate.setMandatory(true);
+                    rabbitTemplate.setConfirmCallback(this);
+                    rabbitTemplate.setReturnCallback(this);
+                    CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
+                    rabbitTemplate.convertAndSend("Account","NewAccount",signUp,correlationData1);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Stand_Result result=new Stand_Result();
+                    result.setErrorMessage("消息队列错误");
+                    result.setSucceed(false);
+                    result.setWrongCode("103");
+                    Date date=new Date();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                    result.setTime(df.format(date));
+                    return result;
+                }
 
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setConfirmCallback(this);
-        rabbitTemplate.setReturnCallback(this);
-        CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
-        rabbitTemplate.convertAndSend("Account","NewAccount",signUp,correlationData1);
+            }
+            else{
+                //系统中已经存在此账户
+                Stand_Result result=new Stand_Result();
+                result.setErrorMessage("账户重复");
+                result.setSucceed(false);
+                result.setWrongCode("101");
+                Date date=new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                result.setTime(df.format(date));
+                return result;
+            }
+
+//            Stand_Result result=new Stand_Result();
+//            result.setTime("casdf");
+//            return result;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            //创建失败
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("Account微服务异常");
+            result.setSucceed(false);
+            result.setWrongCode("102");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
+        }
         Stand_Result result=new Stand_Result();
-        result.setTime("casdf");
+        result.setSucceed(true);
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        result.setTime(df.format(date));
+
         return result;
     }
 

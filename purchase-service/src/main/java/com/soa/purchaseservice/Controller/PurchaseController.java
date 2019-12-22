@@ -17,6 +17,8 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,12 +61,22 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
         }catch (Exception e)
         {
             e.printStackTrace();
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("消息队列错误");
+            result.setSucceed(false);
+            result.setWrongCode("103");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
         }
 
         Stand_Result result= new Stand_Result();
         result.setSucceed(true);
-        result.setWrongCode("0");
-        result.setTime(id);
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        result.setTime(df.format(date));
+        result.setMessage(id);
 
         return result;
     }
@@ -73,17 +85,31 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     @DeleteMapping("/v1/Purchase/{id}")
     public Stand_Result CanclePurchase(@PathVariable("id") String id)
     {
+        PurchaseParam purchaseParam = new PurchaseParam();
         //交给库存服务
         try {
-            PurchaseParam purchaseParam=new PurchaseParam();
-            form order=orderRemote.GetOrder(id);
+
+            form order = orderRemote.GetOrder(id);
             log.info(id);
             log.info(order.getBookId());
-            purchaseParam.Book_id=order.getBookId();
-            purchaseParam.User_id=order.getCustomerId();
-            purchaseParam.price=order.getSinglePrice();
-            purchaseParam.Num=0-order.getBookNum();
-            purchaseParam.Order_id=id;
+            purchaseParam.Book_id = order.getBookId();
+            purchaseParam.User_id = order.getCustomerId();
+            purchaseParam.price = order.getSinglePrice();
+            purchaseParam.Num = 0 - order.getBookNum();
+            purchaseParam.Order_id = id;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("Order微服务错误");
+            result.setSucceed(false);
+            result.setWrongCode("101");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
+        }
+            try{
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
             rabbitTemplate.setMandatory(true);
             rabbitTemplate.setConfirmCallback(this);
@@ -93,11 +119,21 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
         }catch (Exception e)
         {
             e.printStackTrace();
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("消息队列错误");
+            result.setSucceed(false);
+            result.setWrongCode("101");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
         }
         Stand_Result result= new Stand_Result();
         result.setSucceed(true);
         result.setWrongCode("0");
-        result.setTime(null);
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        result.setTime(df.format(date));
 
         return result;
     }
@@ -106,6 +142,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     @PostMapping("/v1/Pay/")
     public Stand_Result Pay(@RequestBody PayPrama payPrama)
     {
+        try {
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
             rabbitTemplate.setMandatory(true);
             rabbitTemplate.setConfirmCallback(this);
@@ -113,9 +150,29 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
             CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
             payPrama.totalPrice=0;
             rabbitTemplate.convertAndSend("Order","UpdateOrder",payPrama,correlationData1);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("消息队列错误");
+            result.setSucceed(false);
+            result.setWrongCode("101");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
+        }
 
 
-        return new Stand_Result();
+
+        Stand_Result result= new Stand_Result();
+        result.setSucceed(true);
+        result.setWrongCode("0");
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        result.setTime(df.format(date));
+
+        return result;
     }
 
     //查看订单
