@@ -16,7 +16,7 @@ public class AccountServiceimpl implements AccountService {
 
     @Override
     public Account findById(String id) {
-        return accountRepository.findById(id).get();
+        return accountRepository.findByAccount(id);
     }
 
     @Override

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 @EnableSwagger2Doc
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class UserController {
 
     @Autowired
@@ -24,12 +25,13 @@ public class UserController {
         //调基础服务拿到结果
 
         LoginResult result=new LoginResult();
-       AccountInfo accountInfo=accountRemote.QueryAccount(params.getId());
+//       AccountInfo accountInfo=accountRemote.QueryAccount(params.getId());
+        AccountInfo accountInfo=accountRemote.QueryAccount(params.getAccount());
        if(params.getPwd().equals(accountInfo.getPwd()))
        {
-           result.setWromgCode(0);
+
            result.setSucceed(true);
-           result.setRole(accountInfo.getRole());
+           result.setRole(accountInfo.getId());
            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
            result.setLogin_Time(df.format(new Date()));
        }

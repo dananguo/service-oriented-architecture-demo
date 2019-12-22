@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @EnableSwagger2Doc
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class AccountController {
 
     @Autowired
