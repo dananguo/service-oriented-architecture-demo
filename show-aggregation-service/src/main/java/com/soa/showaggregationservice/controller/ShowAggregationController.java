@@ -22,6 +22,7 @@ import java.util.List;
 @EnableSwagger2Doc
 @RestController
 @RequestMapping("/v1")
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class ShowAggregationController {
     @Autowired
     BookShowRemote bookShowRemote;

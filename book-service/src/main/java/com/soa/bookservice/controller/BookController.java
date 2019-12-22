@@ -21,6 +21,7 @@ import java.util.Random;
 @EnableSwagger2Doc
 @RestController
 @Slf4j
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class BookController {
     @Autowired
     private BookService bookService;

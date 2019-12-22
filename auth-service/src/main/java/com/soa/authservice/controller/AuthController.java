@@ -5,16 +5,14 @@ import com.soa.authservice.pojo.LoginResult;
 import com.soa.authservice.remote.AccountRemote;
 import com.soa.authservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 19028
  * @date 2019/12/22 0:56
  */
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class AuthController {
 
     @Autowired

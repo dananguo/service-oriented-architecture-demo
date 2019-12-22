@@ -31,8 +31,9 @@ hystrix:
 soa:
   filter:
     whitelist:
-      - user-service/v1/User/login
+      - user-service/v1/User/Account
       - auth-service/v1/User/login
+      - index-show-service/v1/Index
       - /swagger-resources
       - /v2/api-docs
       - /swagger-ui

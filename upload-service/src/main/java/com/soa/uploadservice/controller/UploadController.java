@@ -33,6 +33,7 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @EnableSwagger2Doc
 @RestController
 @Slf4j
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback {
 
     @Autowired

@@ -23,6 +23,7 @@ import java.util.List;
 
 @EnableSwagger2Doc
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class PersonController {
     @Autowired
     private PersonService personService;
