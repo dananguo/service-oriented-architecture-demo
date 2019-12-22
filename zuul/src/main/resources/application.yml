@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: gateway-service-zuul
+server:
+  port: 8081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+soa:
+  filter:
+    whitelist:
+      - user-service/v1/User/login
+      - auth-service/v1/User/login
