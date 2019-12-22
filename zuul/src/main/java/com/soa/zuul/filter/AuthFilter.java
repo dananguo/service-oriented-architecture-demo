@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -54,8 +55,11 @@ public class AuthFilter extends ZuulFilter {
     @Override
     public Object run() {
 
+        // CORS
+
+
         RequestContext requestContext = RequestContext.getCurrentContext();
-        String token = requestContext.getRequest().getHeader("Bearer");
+        String token = requestContext.getRequest().getParameter("token");
 //        // 以下为动态配置
 //        JWTUtils jwtUtils = JWTUtils.getInstance(System.getProperty("rsa.modulus"), System.getProperty("rsa.privateExponent"), System.getProperty("rsa.publicExponent"));
         JWTUtils jwtUtils =JWTUtils.getInstance();
@@ -85,11 +89,19 @@ public class AuthFilter extends ZuulFilter {
 
         // 验证 TOKEN
         if (!StringUtils.hasText(token)) {
+            RequestContext ctx = RequestContext.getCurrentContext();
+
+            HttpServletResponse response = ctx.getResponse();
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
             requestContext.setSendZuulResponse(false);
             requestContext.set("isSuccess", false);
             ResponseData data = ResponseData.fail("非法请求【缺少 Authorization 信息】", ResponseCode.NO_AUTH_CODE.getCode());
             requestContext.setResponseBody(JsonUtils.toJson(data));
             requestContext.getResponse().setContentType("application/json; charset=utf-8");
+            requestContext.getResponse().setStatus(401);
             return null;
         }
 

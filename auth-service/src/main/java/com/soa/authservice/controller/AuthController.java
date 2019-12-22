@@ -4,6 +4,7 @@ import com.soa.authservice.pojo.LoginParams;
 import com.soa.authservice.pojo.LoginResult;
 import com.soa.authservice.remote.AccountRemote;
 import com.soa.authservice.service.AuthService;
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @CrossOrigin(maxAge = 3600,origins = "*")
+@EnableSwagger2Doc
 public class AuthController {
 
     @Autowired

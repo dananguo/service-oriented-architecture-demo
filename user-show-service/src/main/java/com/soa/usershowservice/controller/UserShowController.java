@@ -32,7 +32,7 @@ public class UserShowController {
     @Autowired
     HttpServletRequest request;
 
-    @GetMapping("/user-show-by-id/")
+    @GetMapping("/user-show-by-id")
     public Result showUser(){
         String  id=request.getHeader("uid");
         Result result=new Result();

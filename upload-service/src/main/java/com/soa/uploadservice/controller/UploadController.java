@@ -21,9 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.RequestContext;
 
 import javax.security.auth.message.callback.SecretKeyCallback;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -38,6 +40,7 @@ public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTem
 
     @Autowired
     HttpServletRequest request;
+
 
     @Autowired
     BookRemote bookRemote;
