@@ -140,8 +140,8 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
 
     //支付订单
     @PostMapping("/v1/Pay/")
-    public Stand_Result Pay(@RequestBody PayPrama payPrama)
-    {
+    public Stand_Result Pay(@RequestBody PayPrama payPrama) throws InterruptedException {
+
         try {
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
             rabbitTemplate.setMandatory(true);
@@ -162,8 +162,6 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
             result.setTime(df.format(date));
             return result;
         }
-
-
 
         Stand_Result result= new Stand_Result();
         result.setSucceed(true);
