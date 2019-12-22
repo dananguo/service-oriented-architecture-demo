@@ -3,6 +3,7 @@ spring:
     name: gateway-service-zuul
 server:
   port: 8081
+  address: 127.0.0.1
 eureka:
   client:
     serviceUrl:
@@ -11,6 +12,10 @@ zuul:
   host:
     connect-timeout-millis: 30000
     socket-timeout-millis: 30000
+  routes:
+      api-user:
+        path: /auth/**
+        service-id: auth-service
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
