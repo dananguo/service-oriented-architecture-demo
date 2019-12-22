@@ -16,6 +16,8 @@ public class DetailProduct {
     private String uploader_name;
     private String price;
     private String detail;
+    private String type;
+    private String publisher;
 
     @Override
     public String toString() {

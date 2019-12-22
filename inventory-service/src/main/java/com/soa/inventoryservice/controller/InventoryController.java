@@ -22,6 +22,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -118,6 +119,12 @@ public void NewInventory(@Payload Book book, Channel channel, @Header(AmqpHeader
     @GetMapping("/v1/Inventory/{id}")
     public Book QueryInventory(@PathVariable("id") String id){
         return inventoryService.findById(id);
+    }
+
+        //查询上传者
+    @GetMapping("/v1/inventory-by-user_id/{user_id}")
+    public List<Book> QueryInventoryByUserId(@PathVariable("user_id") String id){
+        return inventoryService.findByUser_id(id);
     }
 
 

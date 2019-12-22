@@ -17,4 +17,6 @@ public interface InventoryService {
     public void save(Book book);
 
     public void deleteAll();
+
+    public List<Book> findByUser_id(String user_id);
 }

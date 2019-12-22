@@ -51,6 +51,8 @@ public class BookShowCotroller {
                 detailProduct.setImage_url(bookInfo.getPicture_url());
                 detailProduct.setDetail(bookInfo.getDescribe());
                 detailProduct.setPrice(bookInfo.getBook_price());
+                detailProduct.setType(bookInfo.getBook_type());
+                detailProduct.setPublisher(bookInfo.getPublisher());
                 Book inventory=inventoryRemote.QueryInventory(id);
                 if(inventory==null){
                         detailResult.setResult(false);
@@ -62,12 +64,16 @@ public class BookShowCotroller {
                         if(user==null){
                                 detailResult.setResult(false);
                                 detailResult.setResultDescribe("不存在该上传者。");
-                                return detailResult;
+                                //return detailResult;
                         }
-                        detailProduct.setUploader_name(user.getName());
+                        else{
+                                detailProduct.setUploader_name(user.getName());
+                                detailResult.setResultDescribe("成功。");
+                        }
+
 
                 }
-                detailResult.setResultDescribe("成功。");
+
                 detailResult.setResult(true);
                 detailResult.setProduct(detailProduct);
 
@@ -87,6 +93,8 @@ public class BookShowCotroller {
                         searchProduct.setId(id);
                         searchProduct.setImage_url(bookInfo.getPicture_url());
                         searchProduct.setPrice(bookInfo.getBook_price());
+                        searchProduct.setType(bookInfo.getBook_type());
+                        searchProduct.setPublisher(bookInfo.getPublisher());
                         Book inventory=inventoryRemote.QueryInventory(id);
                         if(inventory==null)
                                 searchProduct.setUploader_name("库存中不存在该书。");

@@ -37,4 +37,9 @@ public class InventoryServiceimpl implements InventoryService {
     public void deleteAll() {
         bookRepository.deleteAll();
     }
+
+    @Override
+    public List<Book> findByUser_id(String user_id) {
+       return bookRepository.findByUser_id(user_id);
+    }
 }

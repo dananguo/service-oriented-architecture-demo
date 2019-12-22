@@ -1,4 +1,4 @@
-package com.soa.bookshowservice.pojo;
+package com.soa.usershowservice.pojo;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
@@ -7,17 +7,14 @@ import lombok.Data;
  * @program: finalProject
  * @description:
  * @author: Yu Liu
- * @create: 2019/12/20
+ * @create: 2019/12/21
  **/
 @Data
-public class SearchProduct {
-    private String id;
-    private String name;
+public class UploadProduct {
+    private String product_id;
     private String image_url;
-    private String price;
-    private String uploader_name;
-    private String type;
-    private String publisher;
+    private String name;
+    private double price;
 
     @Override
     public String toString() {
