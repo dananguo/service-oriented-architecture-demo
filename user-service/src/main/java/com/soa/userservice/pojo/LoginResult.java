@@ -7,4 +7,5 @@ public class LoginResult {
     private int WromgCode;
     private String Login_Time;
     private String Role;
+    private String UserId;
 }

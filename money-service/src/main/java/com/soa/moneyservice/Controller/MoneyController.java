@@ -38,8 +38,9 @@ public class MoneyController implements RabbitTemplate.ReturnCallback,RabbitTemp
     {
         try {
             Money money=new Money();
-            money.setUserId(sign_up_params.id);
+            money.setId(sign_up_params.id);
             money.setMoney(2000);
+            log.info(money.getId());
             moneyService.UpdateMoney(money);
             channel.basicAck(deleverTag,false);
         }catch (Exception e)

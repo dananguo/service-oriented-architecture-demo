@@ -22,6 +22,7 @@ import java.util.UUID;
 
 @EnableSwagger2Doc
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class AccountController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired
@@ -76,11 +77,11 @@ public class AccountController implements RabbitTemplate.ReturnCallback,RabbitTe
 
         return null;
     }
-    //查询账户
-    @GetMapping("/v1/Account/{id}")
+    //查询账户,现在已经改为用account查询
+    @PostMapping("/v1/Account/{id}")
     public AccountInfo QueryAccount(@PathVariable("id") String id) {
         Account account=new Account();
-        account=accountService.findById(id);
+        account=accountService.findByAccount(id);
         AccountInfo accountInfo=new AccountInfo();
         accountInfo.setId(account.get_id());
         accountInfo.setAccount(account.getAccount());
@@ -90,7 +91,7 @@ public class AccountController implements RabbitTemplate.ReturnCallback,RabbitTe
     }
 
     //查重账户
-    @GetMapping("/v1/Account/New/{id}")
+    @PostMapping("/v1/Account/New/{id}")
     public boolean CheckAccount(@PathVariable("id") String id)
     {
         return accountService.checkAccount(id);

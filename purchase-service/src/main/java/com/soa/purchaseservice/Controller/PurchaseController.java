@@ -23,6 +23,7 @@ import java.util.UUID;
 @EnableSwagger2Doc
 @RestController
 @Slf4j
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired

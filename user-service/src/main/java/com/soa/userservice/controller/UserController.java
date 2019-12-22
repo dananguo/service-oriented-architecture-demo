@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @EnableSwagger2Doc
 @RestController
+@CrossOrigin(maxAge = 3600,origins = "*")
 public class UserController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired
@@ -33,7 +34,7 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
         //调基础服务拿到结果
 
         LoginResult result=new LoginResult();
-       AccountInfo accountInfo=accountRemote.QueryAccount(params.getId());
+       AccountInfo accountInfo=accountRemote.QueryAccount(params.getAccount());
        if(params.getPwd().equals(accountInfo.getPwd()))
        {
            result.setWromgCode(0);
@@ -41,6 +42,7 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
            result.setRole(accountInfo.getRole());
            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
            result.setLogin_Time(df.format(new Date()));
+           result.setUserId(accountInfo.id);
        }
        else
        {
@@ -72,8 +74,9 @@ public class UserController implements RabbitTemplate.ReturnCallback,RabbitTempl
         rabbitTemplate.setReturnCallback(this);
         CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
         rabbitTemplate.convertAndSend("Account","NewAccount",signUp,correlationData1);
-
-        return null;
+        Stand_Result result=new Stand_Result();
+        result.setTime("casdf");
+        return result;
     }
 
     @PostMapping("/v1/User/PersonInfo")

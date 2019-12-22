@@ -16,7 +16,7 @@ public class Money {
 
     @Id
     @Column(name = "_id")
-    private String userId;
+    private String Id;
 
     @Column(name = "money")
     private int money;

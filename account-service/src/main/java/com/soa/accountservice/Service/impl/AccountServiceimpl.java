@@ -20,6 +20,11 @@ public class AccountServiceimpl implements AccountService {
     }
 
     @Override
+    public Account findByAccount(String id) {
+        return accountRepository.findByAccount(id);
+    }
+
+    @Override
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
