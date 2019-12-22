@@ -16,12 +16,15 @@ public class logistics {
     @Column(name = "log_id")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String log_id;
+    private String logId;
 
     @Column(name = "orderid")
     private String orderid;
 
     @Column(name = "userid")
     private String userid;
+
+    @Column(name = "state")
+    private boolean state;
 
 }

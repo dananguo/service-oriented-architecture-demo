@@ -22,6 +22,8 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
@@ -75,6 +77,14 @@ public class UploadController implements RabbitTemplate.ReturnCallback,RabbitTem
         }catch (Exception e)
         {
             e.printStackTrace();
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("消息队列错误");
+            result.setSucceed(false);
+            result.setWrongCode("103");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
         }
 
 //        //将参数拆分成两个部分

@@ -14,12 +14,29 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Override
-    public List<form> FindByCustomerId(String id) {
+    public List<form> findByCustomerId(String id) {
        return orderRepository.findByCustomerId(id);
     }
 
     @Override
-    public List<form> FindAll() {
+    public List<form> findAll() {
         return orderRepository.findAll();
+    }
+
+    @Override
+    public void save(form neworder) {
+        orderRepository.save(neworder);
+    }
+
+    @Override
+    public form findByOrderId(String orderid) {
+
+
+        return orderRepository.findById(orderid).get();
+    }
+    @Override
+    public void DeleteOrder(String id)
+    {
+        orderRepository.deleteById(id);
     }
 }

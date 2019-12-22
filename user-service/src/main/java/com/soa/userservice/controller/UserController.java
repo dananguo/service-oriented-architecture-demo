@@ -4,20 +4,32 @@ import com.soa.userservice.pojo.*;
 import com.soa.userservice.remote.AccountRemote;
 import com.soa.userservice.remote.PersonRemote;
 import com.spring4all.swagger.EnableSwagger2Doc;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
+
 @EnableSwagger2Doc
 @RestController
 @CrossOrigin(maxAge = 3600,origins = "*")
-public class UserController {
+@Slf4j
+public class UserController implements RabbitTemplate.ReturnCallback,RabbitTemplate.ConfirmCallback{
 
     @Autowired
     AccountRemote accountRemote;
     @Autowired
     PersonRemote personRemote;
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     @PostMapping("/v1/User/login")
     @ResponseBody
@@ -25,8 +37,7 @@ public class UserController {
         //调基础服务拿到结果
 
         LoginResult result=new LoginResult();
-//       AccountInfo accountInfo=accountRemote.QueryAccount(params.getId());
-        AccountInfo accountInfo=accountRemote.QueryAccount(params.getAccount());
+       AccountInfo accountInfo=accountRemote.QueryAccount(params.getAccount());
        if(params.getPwd().equals(accountInfo.getPwd()))
        {
 
@@ -34,6 +45,7 @@ public class UserController {
            result.setRole(accountInfo.getId());
            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
            result.setLogin_Time(df.format(new Date()));
+           result.setUserId(accountInfo.id);
        }
        else
        {
@@ -44,7 +56,6 @@ public class UserController {
        }
         return result;
     }
-
     @PutMapping("/v1/User/Account")
     @ResponseBody
     public Stand_Result UpdateAccount(@RequestBody AccountInfo accountInfo)
@@ -55,10 +66,71 @@ public class UserController {
     }
     @PostMapping("/v1/User/Account")
     @ResponseBody
-    public Sign_up_Result CreateAccount(@RequestBody Sign_up_params sign_up)
+    public Stand_Result CreateAccount(@RequestBody Sign_up_params signUp)
     {
         //调用基础服务得到结果,然后写聚合结果。
-        Sign_up_Result result=accountRemote.CreateNew(sign_up);
+        //先建账户，然后补单积分和个人信息
+        //先查看数据库中有无重名账户，有则返回错误码
+        try{
+            AccountInfo accountInfo= accountRemote.QueryAccount(signUp.Account);
+            if(accountInfo.getAccount().equals("无此账户"))
+            {
+                try {
+                    //可以开始创建
+                    rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+                    rabbitTemplate.setMandatory(true);
+                    rabbitTemplate.setConfirmCallback(this);
+                    rabbitTemplate.setReturnCallback(this);
+                    CorrelationData correlationData1=new CorrelationData(UUID.randomUUID().toString());
+                    rabbitTemplate.convertAndSend("Account","NewAccount",signUp,correlationData1);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Stand_Result result=new Stand_Result();
+                    result.setErrorMessage("消息队列错误");
+                    result.setSucceed(false);
+                    result.setWrongCode("103");
+                    Date date=new Date();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                    result.setTime(df.format(date));
+                    return result;
+                }
+
+            }
+            else{
+                //系统中已经存在此账户
+                Stand_Result result=new Stand_Result();
+                result.setErrorMessage("账户重复");
+                result.setSucceed(false);
+                result.setWrongCode("101");
+                Date date=new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                result.setTime(df.format(date));
+                return result;
+            }
+
+//            Stand_Result result=new Stand_Result();
+//            result.setTime("casdf");
+//            return result;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            //创建失败
+            Stand_Result result=new Stand_Result();
+            result.setErrorMessage("Account微服务异常");
+            result.setSucceed(false);
+            result.setWrongCode("102");
+            Date date=new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            result.setTime(df.format(date));
+            return result;
+        }
+        Stand_Result result=new Stand_Result();
+        result.setSucceed(true);
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        result.setTime(df.format(date));
+
         return result;
     }
 
@@ -96,5 +168,15 @@ public class UserController {
     {
         Stand_Result result=personRemote.Delete(id);
         return result;
+    }
+
+    @Override
+    public void confirm(CorrelationData correlationData, boolean b, String s) {
+
+    }
+
+    @Override
+    public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+
     }
 }

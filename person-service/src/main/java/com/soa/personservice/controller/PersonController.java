@@ -1,13 +1,20 @@
 package com.soa.personservice.controller;
 
+import com.rabbitmq.client.Channel;
 import com.soa.personservice.Service.PersonService;
 import com.soa.personservice.pojo.Person;
 import com.soa.personservice.pojo.PersonInfo;
+import com.soa.personservice.pojo.Sign_up_params;
 import com.soa.personservice.pojo.Stand_Result;
 import com.spring4all.swagger.EnableSwagger2Doc;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,29 +28,54 @@ public class PersonController {
     private PersonService personService;
 
     //新建个人信息
+    @RabbitListener(queues = "NewPerson")
+    public void NewPerson(@Payload Sign_up_params sign_up_params, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deleverTag) throws IOException
+    {
+        try {
+            Person person=new Person();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            person.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            person.setPhone(null);
+            person.setEmail(null);
+            person.setSignature("无");
+            person.setCountry("China");
+            person.setSex(null);
+            person.setAge(0);
+            person.setName("暂无");
+            person.setId(sign_up_params.id);
+            personService.save(person);
+            channel.basicAck(deleverTag,false);
 
-    @PostMapping("/v1/Person")
-    public Stand_Result NewPerson(@RequestBody PersonInfo personInfo) {
-        System.out.println(personInfo);
-        Person person=new Person();
-        person.setId(personInfo.getId());
-        person.setName(personInfo.getName());
-        person.setAge(personInfo.getAge());
-        person.setSex(personInfo.getSex());
-        person.setCountry(personInfo.getCountry());
-        person.setSignature(personInfo.getSignature());
-        person.setEmail(personInfo.getE_mail());
-        person.setPhone(personInfo.getPhone());
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        person.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        personService.save(person);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            channel.basicReject(deleverTag,true);
+        }
 
-        //返回标准的信息
-        Stand_Result result=new Stand_Result();
-        result.setSucceed(true);
-        result.setWrongCode("0");
-        return result;
+
     }
+//    @PostMapping("/v1/Person")
+//    public Stand_Result NewPerson(@RequestBody PersonInfo personInfo) {
+//        System.out.println(personInfo);
+//        Person person=new Person();
+//        person.setId(personInfo.getId());
+//        person.setName(personInfo.getName());
+//        person.setAge(personInfo.getAge());
+//        person.setSex(personInfo.getSex());
+//        person.setCountry(personInfo.getCountry());
+//        person.setSignature(personInfo.getSignature());
+//        person.setEmail(personInfo.getE_mail());
+//        person.setPhone(personInfo.getPhone());
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//        person.setCreateTime(new Timestamp(System.currentTimeMillis()));
+//        personService.save(person);
+//
+//        //返回标准的信息
+//        Stand_Result result=new Stand_Result();
+//        result.setSucceed(true);
+//        result.setWrongCode("0");
+//        return result;
+//    }
 
     //查询个人信息
 

@@ -14,7 +14,7 @@ public interface AccountRemote {
     public Sign_up_Result CreateNew(@RequestBody Sign_up_params sign_up_params);
 
     //查询账户
-    @GetMapping("/v1/Account/{id}")
+    @PostMapping("/v1/Account/{id}")
     public AccountInfo QueryAccount(@PathVariable("id") String id);
     //修改账户
     @PutMapping("/v1/Account")
@@ -22,5 +22,4 @@ public interface AccountRemote {
     //删除账户
     @DeleteMapping("/v1/Account/{id}")
     public Stand_Result Delete(@PathVariable("id") String id);
-
 }

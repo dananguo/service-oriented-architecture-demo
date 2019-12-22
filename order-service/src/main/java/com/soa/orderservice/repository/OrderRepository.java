@@ -11,5 +11,6 @@ public interface OrderRepository extends JpaRepository<form,String > {
 
 
     public List<form> findByCustomerId(String customerid);
-
+    public form findByOrderId(String orderid);
+    public void deleteByOrderId(String orderid);
 }

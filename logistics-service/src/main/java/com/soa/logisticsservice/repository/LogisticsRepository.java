@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LogisticsRepository extends JpaRepository<logistics,String > {
+    public logistics findByOrderid(String id);
 }

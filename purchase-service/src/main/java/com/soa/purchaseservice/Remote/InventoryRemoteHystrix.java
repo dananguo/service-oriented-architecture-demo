@@ -27,4 +27,9 @@ public class InventoryRemoteHystrix implements InventoryRemote {
         result.setWrongCode("1");
         return null;
     }
+
+    @Override
+    public Book QueryInventory(String id) {
+        return null;
+    }
 }

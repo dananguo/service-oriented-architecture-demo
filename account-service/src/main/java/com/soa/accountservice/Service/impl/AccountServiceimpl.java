@@ -20,6 +20,11 @@ public class AccountServiceimpl implements AccountService {
     }
 
     @Override
+    public Account findByAccount(String id) {
+        return accountRepository.findByAccount(id);
+    }
+
+    @Override
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
@@ -37,5 +42,18 @@ public class AccountServiceimpl implements AccountService {
     @Override
     public void deleteAll() {
         accountRepository.deleteAll();
+    }
+
+    @Override
+    public boolean checkAccount(String id) {
+        if(accountRepository.findByAccount(id)!=null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
 }

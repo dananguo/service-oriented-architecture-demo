@@ -14,8 +14,6 @@ import javax.persistence.*;
 @Entity(name = "Account")
 public class Account {
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     @Column(name = "_id")
     private String _id;
 
