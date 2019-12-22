@@ -33,6 +33,9 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     AccountRemote accountRemote;
 
     @Autowired
+    BookRemote bookRemote;
+
+    @Autowired
     InventoryRemote inventoryRemote;
 
     @Autowired
@@ -174,7 +177,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     }
 
     //支付订单
-    @PostMapping("/v1/Pay/")
+    @PostMapping("/v1/Pay")
     public Stand_Result Pay(@RequestBody PayPrama payPrama) throws InterruptedException {
 
         //检查余额够不够
@@ -212,7 +215,20 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
 
         return result;
     }
-
+    //初始化订单页面
+    @GetMapping("/v1/Purchase/Order/{orderid}")
+    public OrderInfo InitOrder(@PathVariable("id") String id)
+    {
+        //已知订单id，要获取书籍信息给前端。
+         form order=orderRemote.GetOrder(id);
+         String book_id=order.getBookId();
+         BookInfo bookInfo=bookRemote.QueryBook(book_id);
+         OrderInfo orderInfo=new OrderInfo();
+         orderInfo.setBookPrice(bookInfo.getBook_price());
+         orderInfo.setBookName(bookInfo.getBook_title());
+         orderInfo.setPublisher(bookInfo.getPublisher());
+         return orderInfo;
+    }
     //查看订单
     @GetMapping("/v1/Purchase/{id}")
     public List<form> CheckPurchase(@PathVariable("id") String user_id)
