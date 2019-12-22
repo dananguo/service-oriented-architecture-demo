@@ -1,4 +1,4 @@
-package com.soa.authservice.pojo;
+package com.soa.bookservice.pojo;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Data;

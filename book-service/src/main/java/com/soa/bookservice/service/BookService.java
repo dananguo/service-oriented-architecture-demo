@@ -1,6 +1,6 @@
-package com.soa.authservice.service;
+package com.soa.bookservice.service;
 
-import com.soa.authservice.pojo.BookInfo;
+import com.soa.bookservice.pojo.BookInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

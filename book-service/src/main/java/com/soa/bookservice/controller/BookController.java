@@ -1,9 +1,9 @@
-package com.soa.authservice.controller;
+package com.soa.bookservice.controller;
 
 import com.rabbitmq.client.Channel;
-import com.soa.authservice.pojo.BookInfo;
-import com.soa.authservice.pojo.Stand_Result;
-import com.soa.authservice.service.BookService;
+import com.soa.bookservice.pojo.BookInfo;
+import com.soa.bookservice.pojo.Stand_Result;
+import com.soa.bookservice.service.BookService;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

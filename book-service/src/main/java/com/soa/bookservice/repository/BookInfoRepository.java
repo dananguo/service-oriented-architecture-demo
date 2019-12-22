@@ -1,6 +1,6 @@
-package com.soa.authservice.repository;
+package com.soa.bookservice.repository;
 
-import com.soa.authservice.pojo.BookInfo;
+import com.soa.bookservice.pojo.BookInfo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

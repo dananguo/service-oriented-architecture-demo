@@ -1,4 +1,4 @@
-package com.soa.authservice;
+package com.soa.bookservice;
 
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;

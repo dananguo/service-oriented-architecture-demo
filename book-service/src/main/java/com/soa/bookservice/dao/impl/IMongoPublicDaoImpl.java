@@ -1,6 +1,6 @@
-package com.soa.authservice.dao.impl;
+package com.soa.bookservice.dao.impl;
 
-import com.soa.authservice.dao.IMongoPublicDao;
+import com.soa.bookservice.dao.IMongoPublicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;

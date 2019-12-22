@@ -1,9 +1,9 @@
-package com.soa.authservice.service.impl;
+package com.soa.bookservice.service.impl;
 
-import com.soa.authservice.dao.IMongoPublicDao;
-import com.soa.authservice.pojo.BookInfo;
-import com.soa.authservice.repository.BookInfoRepository;
-import com.soa.authservice.service.BookService;
+import com.soa.bookservice.dao.IMongoPublicDao;
+import com.soa.bookservice.pojo.BookInfo;
+import com.soa.bookservice.repository.BookInfoRepository;
+import com.soa.bookservice.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
