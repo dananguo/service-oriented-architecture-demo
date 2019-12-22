@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @Document(collection = "bookInfo")
 public class BookInfo {
     @Id
+    private String id;
     private String book_id;
     private String book_title;
     private String book_type;
