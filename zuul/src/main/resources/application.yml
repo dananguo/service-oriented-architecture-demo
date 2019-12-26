@@ -12,22 +12,6 @@ zuul:
   host:
     connect-timeout-millis: 30000
     socket-timeout-millis: 30000
-  routes:
-      api-user:
-        path: /auth/**
-        service-id: auth-service
-ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
-hystrix:
-    command:
-      default:
-        execution:
-          isolation:
-            strategy: THREAD
-            thread:
-                 timeoutInMilliseconds: 212000
-
 soa:
   filter:
     whitelist:
