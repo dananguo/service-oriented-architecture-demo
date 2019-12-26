@@ -42,7 +42,7 @@ public class PersonController {
             person.setCountry("China");
             person.setSex(null);
             person.setAge(0);
-            person.setName("暂无");
+            person.setName("佚名");
             person.setId(sign_up_params.id);
             personService.save(person);
             channel.basicAck(deleverTag,false);

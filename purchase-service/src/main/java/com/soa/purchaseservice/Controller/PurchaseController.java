@@ -217,7 +217,7 @@ public class PurchaseController implements RabbitTemplate.ReturnCallback,RabbitT
     }
     //初始化订单页面
     @GetMapping("/v1/Purchase/Order/{orderid}")
-    public OrderInfo InitOrder(@PathVariable("id") String id)
+    public OrderInfo InitOrder(@PathVariable("orderid") String id)
     {
         //已知订单id，要获取书籍信息给前端。
          form order=orderRemote.GetOrder(id);

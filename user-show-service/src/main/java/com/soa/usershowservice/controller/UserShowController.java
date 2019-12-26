@@ -50,14 +50,14 @@ public class UserShowController {
         List<Book> books=inventoryRemote.QueryInventoryByUserId(id);
 
         for(Book book:books){
-
             UploadProduct uploadProduct=new UploadProduct();
             String bookId=book.getBook_id();
+            BookInfo info = bookRemote.QueryBook(bookId);
             uploadProduct.setProduct_id(bookId);
-            uploadProduct.setName(personInfo.getName());
+            uploadProduct.setImage_url(info.getPicture_url());
+            uploadProduct.setName(info.getBook_title());
             uploadProduct.setPrice(book.getBook_price());
             uploadProducts.add(uploadProduct);
-
         }
         result.setUpload_products(uploadProducts);
         List<BuyProduct> buyProducts=new ArrayList<>();
