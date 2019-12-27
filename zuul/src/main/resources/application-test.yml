@@ -10,12 +10,23 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.0.22:9000/eureka/
-
+zuul:
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    api-user:
+      path: /auth/**
+      service-id: auth-service
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
 soa:
   filter:
     whitelist:
-      - user-service/v1/User/login
+      - user-service/v1/User/Account
       - auth-service/v1/User/login
+      - index-show-service/v1/Index
       - /swagger-resources
       - /v2/api-docs
       - /swagger-ui
